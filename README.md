@@ -11,6 +11,18 @@
 
 ---
 
+---
+
+## 📸 Capturas
+
+<p align="center">
+  <img src="images/cap-1.png" alt="PrivScore — estado inicial" width="720" />
+</p>
+
+<p align="center">
+  <img src="images/cap-2.png" alt="PrivScore — resultado tras analizar" width="720" />
+</p>
+
 ## ✨ Qué hace
 
 - ✅ Muestra una **nota A–E** (tipo NutriScore) para la web actual.
@@ -21,7 +33,6 @@
 
 > [!NOTE]  
 > La **letra final** siempre la calcula un **scoring determinista** (reglas y pesos). La IA, si se activa, solo ayuda a **extraer señales/evidencias**.
-> Los pesos del scoring están pensados para ser **explicables** y fáciles de ajustar, manteniendo consistencia entre sitios.
 
 ---
 
@@ -89,6 +100,9 @@ La nota se calcula con señales como:
 - 🍪 Muchas cookies / cookies persistentes
 - ✅ Derechos del usuario claros (borrado, acceso, portabilidad)
 
+> [!NOTE]  
+> Los pesos del scoring están pensados para ser **explicables** y fáciles de ajustar, manteniendo consistencia entre sitios.
+
 ---
 
 ## 🗂️ Estructura del proyecto
@@ -122,7 +136,20 @@ privscore-extension/
 
 ---
 
-## 📝 Créditos
+## 🧪 Limitaciones conocidas
 
-> Idea de **[@hugo-guarido-dominguez](https://github.com/hugo-guarido-dominguez)**  
-> Desarrollado por **[@marichu-kt](https://github.com/marichu-kt)**
+- Algunas webs bloquean o dificultan la descarga de su política (CORS/redirecciones).
+- La detección de trackers/cookies es **heurística** (no perfecta).
+- El resultado puede ser **parcial** si no hay política accesible o no hay enlaces claros.
+
+---
+
+## 🔗 LINKS
+> -
+
+---
+
+## Créditos
+
+Idea de **@hugo-guarido-dominguez**  
+Desarrollado por **@marichu-kt**
