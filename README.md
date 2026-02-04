@@ -21,6 +21,7 @@
 
 > [!NOTE]  
 > La **letra final** siempre la calcula un **scoring determinista** (reglas y pesos). La IA, si se activa, solo ayuda a **extraer señales/evidencias**.
+> Los pesos del scoring están pensados para ser **explicables** y fáciles de ajustar, manteniendo consistencia entre sitios.
 
 ---
 
@@ -88,9 +89,6 @@ La nota se calcula con señales como:
 - 🍪 Muchas cookies / cookies persistentes
 - ✅ Derechos del usuario claros (borrado, acceso, portabilidad)
 
-> [!NOTE]  
-> Los pesos del scoring están pensados para ser **explicables** y fáciles de ajustar, manteniendo consistencia entre sitios.
-
 ---
 
 ## 🗂️ Estructura del proyecto
@@ -124,20 +122,7 @@ privscore-extension/
 
 ---
 
-## 🧪 Limitaciones conocidas
-
-- Algunas webs bloquean o dificultan la descarga de su política (CORS/redirecciones).
-- La detección de trackers/cookies es **heurística** (no perfecta).
-- El resultado puede ser **parcial** si no hay política accesible o no hay enlaces claros.
-
----
-
-## 🔗 LINKS
-> -
-
----
-
 ## Créditos
 
-Idea de **@hugo-guarido-dominguez**  
-Desarrollado por **@marichu-kt**
+> Idea de **[@hugo-guarido-dominguez](https://github.com/hugo-guarido-dominguez)**  
+> Desarrollado por **[@marichu-kt](https://github.com/marichu-kt)**
