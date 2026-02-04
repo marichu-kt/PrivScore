@@ -63,15 +63,9 @@
 
 ✅ Listo. Abre cualquier web y pulsa el icono de la extensión.
 
-> [!IMPORTANT]  
-> Si cambias archivos, recarga la extensión desde `chrome://extensions/` para que los cambios se apliquen.
-
 ---
 
 ## 🧠 Activar IA (Gemini) — Opcional
-
-> [!WARNING]  
-> **No hardcodees** tu API key dentro del código: una extensión se puede inspeccionar y extraer.
 
 ### Obtener una API key
 1. Entra en Google AI Studio
@@ -83,9 +77,6 @@
 - Pega la clave en **Gemini API Key**
 - Activa “Usar IA (Gemini)”
 - Guarda
-
-> [!CAUTION]
-> La API key puede consumir cuota. Si compartes tu PC o el proyecto, evita subir configuraciones con claves o logs sensibles.
 
 ---
 
