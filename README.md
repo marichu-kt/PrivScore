@@ -11,8 +11,6 @@
 
 ---
 
----
-
 ## 📸 Capturas
 
 <p align="center">
