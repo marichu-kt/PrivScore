@@ -9,9 +9,13 @@
   <img src="https://img.shields.io/badge/Edge-Compatible-green" />
 </p>
 
+<p align="center">
+  <img src="images/banner.png" alt="PrivScore — estado inicial" width="720" />
+</p>
+
 ---
 
-## 📸 Capturas
+## 📸 Capturas de la Ejecución
 
 <p align="center">
   <img src="images/cap-1.png" alt="PrivScore — estado inicial" width="720" />
