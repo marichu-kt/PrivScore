@@ -122,7 +122,7 @@ privscore-extension/
 
 ---
 
-## Créditos
+## 📝 Créditos
 
 > Idea de **[@hugo-guarido-dominguez](https://github.com/hugo-guarido-dominguez)**  
 > Desarrollado por **[@marichu-kt](https://github.com/marichu-kt)**
