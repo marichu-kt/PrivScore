@@ -1,0 +1,300 @@
+:root{
+  --bg:#f7f1e3; /* ✅ cambiado a crema */
+  --card:#ffffff;
+  --border:#e5e7eb;
+  --muted:rgba(0,0,0,.65);
+  --shadow:0 10px 24px rgba(0,0,0,.06);
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--bg);
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:#111827;
+}
+
+.wrap{
+  width:360px;
+  padding:14px;
+}
+
+/* HERO */
+.topArea{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:16px;
+}
+
+/* Nutri-like label */
+.scoreLabel{
+  width:100%;
+  border:5px solid #9ca3af;       /* reborde gris */
+  border-radius:22px;
+  padding:14px 12px 14px;
+  background:#fff;
+  box-shadow:0 10px 22px rgba(0,0,0,.06);
+}
+
+.labelTop{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:0;
+  font-weight:1000;
+  letter-spacing:1px;
+  font-size:34px;
+  line-height:1;
+  margin:0 0 12px 0;
+  text-transform:uppercase;
+}
+
+.heroLabel .labelTop{ margin:0; }
+
+/* Título PRIVSCORE por segmentos (PR/IV/S/CO/RE) con contorno gris */
+.labelTop span{
+  display:inline-block;
+  -webkit-text-stroke: 2px #4b5563;
+  text-shadow:
+    -1px -1px 0 #4b5563,
+     1px -1px 0 #4b5563,
+    -1px  1px 0 #4b5563,
+     1px  1px 0 #4b5563;
+}
+.labelTop .tA{ color:#007a4d; }
+.labelTop .tB{ color:#7ac142; }
+.labelTop .tC{ color:#f9d423; }
+.labelTop .tD{ color:#f39c12; }
+.labelTop .tE{ color:#e74c3c; }
+
+.gradebar{
+  position:relative;
+  display:flex;
+  height:54px;
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.seg{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  font-size:24px;
+  color:rgba(255,255,255,.42);
+}
+
+/* Letras A–E (estilo Nutri): visibles pero no dominan */
+.seg span{
+  display:inline-block;
+  font-weight:900;
+  transform:translateY(1px);
+}
+
+.segA{ background:#007a4d; }
+.segB{ background:#7ac142; }
+.segC{ background:#f9d423; }
+.segD{ background:#f39c12; }
+.segE{ background:#e74c3c; }
+
+.marker{
+  position:absolute;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:64px;
+  height:64px;
+  border-radius:999px;
+  background:rgba(255,255,255,.16);
+  border:6px solid rgba(255,255,255,.9);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  font-size:30px;
+  color:#fff;
+  box-shadow:0 10px 18px rgba(0,0,0,.15);
+  pointer-events:none;
+}
+
+/* marker position depending on grade */
+.gradebar[data-grade="A"] .marker{ left:10%; background:#007a4d; }
+.gradebar[data-grade="B"] .marker{ left:30%; background:#7ac142; }
+.gradebar[data-grade="C"] .marker{ left:50%; background:#f9d423; color:#2b2b2b; border-color:rgba(255,255,255,.95); }
+.gradebar[data-grade="D"] .marker{ left:70%; background:#f39c12; }
+.gradebar[data-grade="E"] .marker{ left:90%; background:#e74c3c; }
+
+.gradebar[data-grade="A"] .segA,
+.gradebar[data-grade="B"] .segB,
+.gradebar[data-grade="C"] .segC,
+.gradebar[data-grade="D"] .segD,
+.gradebar[data-grade="E"] .segE{
+  color:rgba(255,255,255,.92);
+}
+
+.gradebar[data-grade="C"] .segC{
+  color:rgba(43,43,43,.92);
+}
+
+/* HERO bar has no marker */
+.heroBar .marker{ display:none; }
+
+/* Status */
+.status{
+  width:100%;
+  text-align:center;
+  font-size:12px;
+  color:var(--muted);
+  min-height:18px;
+}
+
+/* From Uiverse.io by vinodjangid07 — adapted */
+.button{
+  width:fit-content;
+  height:56px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:12px;
+  background-color:rgb(34,197,94);
+  border-radius:30px;
+  color:rgb(19,19,19);
+  font-weight:700;
+  border:none;
+  position:relative;
+  cursor:pointer;
+  transition-duration:.2s;
+  box-shadow:5px 5px 10px rgba(0,0,0,.116);
+  padding-left:16px;
+  padding-right:26px;
+  transition-duration:.5s;
+}
+
+.button:disabled{
+  opacity:.65;
+  cursor:not-allowed;
+}
+
+.svgIcon{
+  height:32px;
+  transition-duration:1.5s;
+}
+
+.svgIcon path{
+  fill:rgb(19,19,19);
+}
+
+.button:hover{
+  background-color:rgb(74,222,128);
+  transition-duration:.5s;
+}
+
+.button:active{
+  transform:scale(.97);
+  transition-duration:.2s;
+}
+
+.button:hover .svgIcon{
+  transform:rotate(250deg);
+  transition-duration:1.5s;
+}
+
+.btnText{
+  font-size:17px;
+}
+
+/* Cards */
+.card{
+  margin-top:12px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:12px;
+  box-shadow:var(--shadow);
+}
+
+.hidden{ display:none; }
+
+/* Skeleton */
+.skBar{
+  height:18px;
+  border-radius:999px;
+  background:rgba(0,0,0,.08);
+  margin-bottom:12px;
+}
+.skRow{
+  display:flex;
+  gap:10px;
+  margin-bottom:10px;
+}
+.skLine{
+  height:10px;
+  border-radius:999px;
+  background:rgba(0,0,0,.08);
+}
+.w60{ width:60%; }
+.w25{ width:25%; }
+.w90{ width:90%; }
+.w80{ width:80%; }
+.w70{ width:70%; }
+.skList{ display:flex; flex-direction:column; gap:8px; }
+
+/* Result meta */
+.metaBlock{
+  margin-top:10px;
+}
+.site{
+  font-size:14px;
+  font-weight:800;
+  word-break:break-word;
+  margin-bottom:2px;
+}
+.score{
+  font-size:12px;
+  color:var(--muted);
+}
+
+/* Bullets: 1 emoji + text */
+.bullets{
+  margin:10px 0 0;
+  padding:0;
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  font-size:12px;
+}
+
+.bullets li{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+}
+
+.bullets .emo{
+  width:18px;
+  flex:0 0 18px;
+  line-height:1.1;
+  transform:translateY(1px);
+}
+.bullets .txt{
+  flex:1;
+}
+
+/* Actions */
+.actions{
+  display:flex;
+  gap:10px;
+  margin-top:12px;
+}
+.btnGhost{
+  flex:1;
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:14px;
+  padding:10px 12px;
+  font-weight:800;
+  cursor:pointer;
+}

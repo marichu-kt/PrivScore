@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="popup.css" />
+    <title>PrivScore</title>
+  </head>
+  <body>
+    <div id="wrap" class="wrap">
+      <!-- HERO (solo antes de analizar) -->
+      <div id="topArea" class="topArea">
+        <div class="scoreLabel heroLabel" role="img" aria-label="PrivScore escala A a E">
+          <div class="labelTop" aria-label="PrivScore">
+            <span class="tA">PR</span><span class="tB">IV</span><span class="tC">S</span><span class="tD">CO</span><span class="tE">RE</span>
+          </div>
+        </div>
+
+        <!-- Botón analizar (estilo Uiverse) -->
+        <button id="analyzeBtn" class="button" type="button" aria-label="Analizar esta web">
+          <svg class="svgIcon" viewBox="0 0 512 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm50.7-186.9L162.4 380.6c-19.4 7.5-38.5-11.6-31-31l55.5-144.3c3.3-8.5 9.9-15.1 18.4-18.4l144.3-55.5c19.4-7.5 38.5 11.6 31 31L325.1 306.7c-3.2 8.5-9.9 15.1-18.4 18.4zM288 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"></path>
+          </svg>
+          <span class="btnText">Analizar web</span>
+        </button>
+
+        <div id="status" class="status" aria-live="polite"></div>
+      </div>
+
+      <!-- Loading skeleton -->
+      <section id="loadingCard" class="card hidden" aria-label="Analizando">
+        <div class="skBar"></div>
+        <div class="skRow">
+          <div class="skLine w60"></div>
+          <div class="skLine w25"></div>
+        </div>
+        <div class="skList">
+          <div class="skLine w90"></div>
+          <div class="skLine w80"></div>
+          <div class="skLine w70"></div>
+        </div>
+      </section>
+
+      <!-- Resultado -->
+      <section id="result" class="card hidden">
+        <div class="scoreLabel" role="img" aria-label="PrivScore A a E">
+          <div class="labelTop" aria-label="PrivScore">
+            <span class="tA">PR</span><span class="tB">IV</span><span class="tC">S</span><span class="tD">CO</span><span class="tE">RE</span>
+          </div>
+          <div id="gradeBar" class="gradebar" data-grade="unknown" aria-label="Escala A a E">
+            <div class="seg segA first"><span>A</span></div>
+            <div class="seg segB"><span>B</span></div>
+            <div class="seg segC"><span>C</span></div>
+            <div class="seg segD"><span>D</span></div>
+            <div class="seg segE last"><span>E</span></div>
+            <div id="gradeMarker" class="marker" aria-hidden="true">?</div>
+          </div>
+        </div>
+
+        <div class="metaBlock">
+          <div id="site" class="site">—</div>
+          <div id="score" class="score">—</div>
+        </div>
+
+        <ul id="bullets" class="bullets"></ul>
+
+        <div class="actions">
+          <button id="detailBtn" class="btnGhost" type="button">Ver detalle</button>
+          <button id="copyBtn" class="btnGhost" type="button">Copiar</button>
+        </div>
+      </section>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

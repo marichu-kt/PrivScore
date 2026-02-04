@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="options.css" />
+    <title>PrivScore — Opciones</title>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="top">
+        <h1>Opciones</h1>
+        <p>Configura si quieres usar IA (Gemini) para extraer señales del texto legal.</p>
+      </header>
+
+      <section class="card">
+        <label class="row">
+          <input type="checkbox" id="useAI" />
+          <span class="labelText">Usar IA (Gemini) para extracción</span>
+        </label>
+
+        <label class="block">
+          <span class="hint">Gemini API Key (BYOK)</span>
+          <input
+            id="apiKey"
+            type="password"
+            placeholder="Pega tu API key (no se comparte; se guarda en tu navegador)"
+            autocomplete="off"
+          />
+          <span class="micro">Recomendado: usar una key personal. No la hardcodees en el código.</span>
+        </label>
+
+      <label class="block">
+          <span class="hint">Model ID</span>
+          <input id="modelId" type="text" value="gemini-2.5-flash-lite" />
+          <span class="micro">Recomendado: un modelo flash-lite (rápido y barato) para extracción.</span>
+        </label>
+
+        <label class="block">
+          <span class="hint">Timeout IA (ms)</span>
+          <input id="timeoutMs" type="number" min="2000" step="500" value="12000" />
+        </label>
+
+        <div class="actions">
+          <button id="saveBtn" class="btnPrimary">Guardar</button>
+          <button id="clearBtn" class="btnSecondary">Borrar API key</button>
+        </div>
+
+        <div id="status" class="status" aria-live="polite"></div>
+      </section>
+
+      <section class="card">
+        <h2>Notas</h2>
+        <ul>
+          <li>Si la IA está desactivada o no hay key, PrivScore funciona en modo <b>keywords</b>.</li>
+          <li>La letra A–E sale de un <b>scoring determinista</b>; la IA solo ayuda a extraer señales.</li>
+        </ul>
+      </section>
+    </div>
+
+    <script src="options.js"></script>
+  </body>
+</html>
