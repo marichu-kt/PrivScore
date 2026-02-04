@@ -133,11 +133,6 @@ privscore-extension/
 
 ---
 
-## 🔗 LINKS
-> -
-
----
-
 ## Créditos
 
 Idea de **@hugo-guarido-dominguez**  
