@@ -1,64 +1,135 @@
-# PrivScore
+# PrivScore Extension 🛡️
 
-PrivScore combina un catálogo visual de servicios con una extensión que analiza cualquier web y abre su ficha detallada dentro del frontend.
+> “NutriScore de privacidad” para webs: una extensión que analiza **cookies**, **señales de tracking** y **políticas de privacidad** para devolver una **nota A–E** con explicación clara.
 
-## Cómo ejecutarlo en local
+<p align="center">
+  <img src="https://img.shields.io/badge/manifest-v3-blue" />
+  <img src="https://img.shields.io/badge/Chrome-Compatible-green" />
+  <img src="https://img.shields.io/badge/Brave-Compatible-green" />
+  <img src="https://img.shields.io/badge/Edge-Compatible-green" />
+</p>
 
-### 1. Frontend
-```powershell
-cd frontend
-npm install
-npm run dev
-```
-Abre la URL que te muestre Vite, normalmente `http://localhost:5173/`.
+<p align="center">
+  <img src="images/banner.png" alt="PrivScore — estado inicial" width="720" />
+</p>
 
-### 2. Extensión
-1. Abre `chrome://extensions/` o `edge://extensions/`
-2. Activa **Modo desarrollador**
-3. Pulsa **Cargar descomprimida**
-4. Selecciona la carpeta `extension`
+---
 
-### 3. Ajustar la URL del frontend en la extensión
-1. En la tarjeta de la extensión, entra en **Detalles**
-2. Abre **Opciones de extensión**
-3. En **URL base del frontend** deja `http://localhost:5173/` para desarrollo local
-4. Guarda
+## 📸 Capturas de la Ejecución
 
-### 4. Probar el flujo completo
-1. Entra en cualquier web
-2. Pulsa la extensión y luego **Analizar web**
-3. Cuando aparezca el resultado, pulsa **Ver detalle en la web**
-4. Se abrirá el frontend en la ruta dinámica `#/analysis` con el análisis real
-5. Desde esa ficha puedes volver al catálogo con **Ver más webs**
+<p align="center">
+  <img src="images/cap-1.png" alt="PrivScore — estado inicial" width="720" />
+</p>
 
-## Cómo publicarlo en GitHub Pages
+<p align="center">
+  <img src="images/cap-2.png" alt="PrivScore — resultado tras analizar" width="720" />
+</p>
 
-El frontend ya está preparado para Pages con assets relativos y `HashRouter`, así que las rutas no se rompen al refrescar.
+## ✨ Qué hace
 
-### Opción recomendada: GitHub Actions
-1. Sube el repositorio a GitHub
-2. En GitHub entra en **Settings → Pages**
-3. En **Source** elige **GitHub Actions**
-4. Haz push a `main` o `master`
-5. El workflow `.github/workflows/deploy-pages.yml` construirá `frontend/dist` y lo publicará
+- ✅ Muestra una **nota A–E** (tipo NutriScore) para la web actual.
+- 🍪 Analiza **cookies** (total, persistentes, y señales de ads/analytics si se detectan).
+- 🌐 Detecta **recursos externos** y **dominios de terceros** (scripts, iframes, preconnect/dns-prefetch, etc.).
+- 🧠 (Opcional) Usa **IA (Gemini)** para **extraer señales** del texto legal (la IA **no decide** la nota).
+- 📌 Genera un resumen “human-readable” con motivos y señales de riesgo.
 
-### URL que debes poner en la extensión cuando ya esté publicado
-En las opciones de la extensión cambia **URL base del frontend** por algo así:
+> [!NOTE]  
+> La **letra final** siempre la calcula un **scoring determinista** (reglas y pesos). La IA, si se activa, solo ayuda a **extraer señales/evidencias**.
+
+---
+
+## 🧩 Cómo funciona (alto nivel)
+
+1. El popup pide analizar la pestaña actual.
+2. Se recopilan señales:
+   - cookies del dominio
+   - links a política de privacidad/cookies
+   - recursos externos / trackers
+   - señales de consentimiento (CMP) y storage (si aplica)
+3. (Opcional) Se llama a Gemini para **extraer señales** del texto legal.
+4. Se calcula un **score 0–100** y se convierte a letra **A–E**.
+5. Se muestran **motivos** claros en formato lista.
+
+> [!TIP]
+> Si la web no enlaza a su política o bloquea su descarga, el análisis se apoyará más en señales técnicas (cookies/trackers) y puede ser menos completo.
+
+---
+
+## 🚀 Instalación (modo desarrollador)
+
+1. Descarga o clona este repositorio.
+2. Abre `chrome://extensions/`
+3. Activa **Modo desarrollador**
+4. Pulsa **Cargar descomprimida**
+5. Selecciona la carpeta del proyecto (donde está `manifest.json`)
+
+✅ Listo. Abre cualquier web y pulsa el icono de la extensión.
+
+---
+
+## 🧠 Activar IA (Gemini) — Opcional
+
+### Obtener una API key
+1. Entra en Google AI Studio
+2. Crea una **API Key**
+3. Copia la clave
+
+### Dónde poner la API key
+- `chrome://extensions/` → tu extensión → **Detalles** → **Opciones de extensión**
+- Pega la clave en **Gemini API Key**
+- Activa “Usar IA (Gemini)”
+- Guarda
+
+---
+
+## 📌 Scoring (A–E)
+
+La nota se calcula con señales como:
+
+- 🔴 Venta/monetización de datos (si se detecta en texto)
+- 🟠 Compartición con terceros
+- 🟠 Publicidad personalizada / tracking
+- 🟡 Retención indefinida o no especificada
+- 🍪 Muchas cookies / cookies persistentes
+- ✅ Derechos del usuario claros (borrado, acceso, portabilidad)
+
+> [!NOTE]  
+> Los pesos del scoring están pensados para ser **explicables** y fáciles de ajustar, manteniendo consistencia entre sitios.
+
+---
+
+## 🗂️ Estructura del proyecto
 
 ```text
-https://TU-USUARIO.github.io/TU-REPO/
+privscore-extension/
+├─ manifest.json
+├─ icons/
+│  ├─ icon16.png
+│  ├─ icon48.png
+│  └─ icon128.png
+└─ src/
+   ├─ background/
+   │  ├─ service_worker.js
+   │  ├─ analyzer_keywords.js
+   │  ├─ scoring.js
+   │  ├─ weights.js
+   │  ├─ bullets.js
+   │  ├─ cookies_summary.js
+   │  ├─ cookie_classifier.js
+   │  ├─ policy_fetcher.js
+   │  ├─ html_cleaner.js
+   │  └─ gemini_client.js
+   ├─ content/
+   │  └─ content_script.js
+   └─ popup/
+      ├─ popup.html
+      ├─ popup.css
+      └─ popup.js
 ```
 
-Después, al pulsar **Ver detalle en la web**, la extensión abrirá la ficha dinámica ya publicada en GitHub Pages.
+---
 
-## Arquitectura aplicada
+## 🧪 Limitaciones conocidas
 
-- El catálogo sigue usando las webs hardcodeadas del frontend
-- La extensión genera un informe real y lo empaqueta en la URL hash del frontend
-- El frontend guarda ese informe en `localStorage` para poder refrescar o reabrir la última ficha dinámica
-- Si el dominio analizado coincide con uno del catálogo, la ficha dinámica reutiliza la base editorial del catálogo y la enriquece con el análisis en vivo
-- Si no coincide, se genera una ficha nueva con el mismo estilo visual
-
-## Backend
-
-El backend sigue siendo opcional. El flujo extensión → frontend no depende de él.
+- Algunas webs bloquean o dificultan la descarga de su política (CORS/redirecciones).
+- El resultado puede ser **parcial** si no hay política accesible o no hay enlaces claros.
