@@ -1,4 +1,4 @@
-export const DEFAULT_FRONTEND_BASE_URL = "http://localhost:5173/";
+export const DEFAULT_FRONTEND_BASE_URL = "https://marichu-kt.github.io/PrivScore/";
 
 function bytesToBase64Url(bytes) {
   let binary = "";
