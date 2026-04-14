@@ -44,9 +44,9 @@ Si el dominio ya existe en el catálogo, la ficha dinámica reutiliza su base ed
 
 ### Frontend publicado
 
-![PrivScore — portada web](images/website.png)
-![PrivScore — catálogo de servicios](images/services.png)
-![PrivScore — ficha detallada](images/detail_page_brave.png)
+![PrivScore — portada web](images/website-1.png)
+![PrivScore — catálogo de servicios](images/services-1.png)
+![PrivScore — ficha detallada](images/detail_page_brave-1.png)
 
 ---
 
