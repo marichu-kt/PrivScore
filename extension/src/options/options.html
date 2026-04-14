@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="options.css" />
+    <title>PrivScore — Opciones</title>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="top">
+        <h1>Opciones</h1>
+        <p>Configura la extracción opcional con Gemini y la URL del frontend que se abrirá al pulsar “Ver detalle”.</p>
+      </header>
+
+      <section class="card">
+        <label class="block">
+          <span class="hint">URL base del frontend</span>
+          <input
+            id="frontendBaseUrl"
+            type="url"
+            placeholder="https://tuusuario.github.io/tu-repo/"
+            autocomplete="off"
+          />
+          <span class="micro">En local usa, por ejemplo, http://localhost:5173/ y en producción la URL publicada en GitHub Pages.</span>
+        </label>
+
+        <label class="row">
+          <input type="checkbox" id="useAI" />
+          <span class="labelText">Usar IA (Gemini) para extracción</span>
+        </label>
+
+        <label class="block">
+          <span class="hint">Gemini API Key (BYOK)</span>
+          <input
+            id="apiKey"
+            type="password"
+            placeholder="Pega tu API key"
+            autocomplete="off"
+          />
+          <span class="micro">La clave se guarda solo en tu navegador.</span>
+        </label>
+
+        <label class="block">
+          <span class="hint">Model ID</span>
+          <input id="modelId" type="text" value="gemini-2.5-flash-lite" />
+        </label>
+
+        <label class="block">
+          <span class="hint">Timeout IA (ms)</span>
+          <input id="timeoutMs" type="number" min="2000" step="500" value="12000" />
+        </label>
+
+        <div class="actions">
+          <button id="saveBtn" class="btnPrimary">Guardar</button>
+          <button id="clearBtn" class="btnSecondary">Borrar API key</button>
+        </div>
+
+        <div id="status" class="status" aria-live="polite"></div>
+      </section>
+
+      <section class="card">
+        <h2>Notas</h2>
+        <ul>
+          <li>La nota A–E se mantiene con scoring determinista.</li>
+          <li>La IA solo mejora la extracción de señales textuales cuando la activas.</li>
+          <li>La URL base del frontend decide dónde se abre la ficha dinámica al pulsar “Ver detalle”.</li>
+        </ul>
+      </section>
+    </div>
+
+    <script src="options.js"></script>
+  </body>
+</html>
