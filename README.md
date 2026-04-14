@@ -132,12 +132,4 @@ privscore-extension/
 ## 🧪 Limitaciones conocidas
 
 - Algunas webs bloquean o dificultan la descarga de su política (CORS/redirecciones).
-- La detección de trackers/cookies es **heurística** (no perfecta).
 - El resultado puede ser **parcial** si no hay política accesible o no hay enlaces claros.
-
----
-
-## Créditos
-
-Idea de **@hugo-guarido-dominguez**  
-Desarrollado por **@marichu-kt**
