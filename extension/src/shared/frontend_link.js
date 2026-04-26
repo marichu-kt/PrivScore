@@ -79,6 +79,34 @@ function slugify(value = "") {
     .replace(/(^-|-$)/g, "");
 }
 
+
+function getHardcodedServiceSlug(report = {}, hostname = "", domain = "") {
+  const host = normalizeHostname(hostname);
+  const registrableDomain = normalizeHostname(domain);
+  const url = String(report?.url || "").toLowerCase();
+  const policyUrl = String(report?.policyUrl || "").toLowerCase();
+  const pageTitle = String(report?.pageTitle || "").toLowerCase();
+  const rawHost = String(report?.host || "").toLowerCase();
+  const combined = `${rawHost} ${host} ${registrableDomain} ${url} ${policyUrl} ${pageTitle}`;
+
+  // Caso especial: Azure suele redirigir a dominios de Microsoft
+  // como azure.microsoft.com, lo que generaría microsoft-microsoft-com.
+  // Para la ficha editorial del catálogo queremos abrir azure-azure-com.
+  const isAzure =
+    host === "azure.com" ||
+    host.endsWith(".azure.com") ||
+    host === "azure.microsoft.com" ||
+    host.endsWith(".azure.microsoft.com") ||
+    combined.includes("azure.com") ||
+    combined.includes("azure.microsoft.com") ||
+    combined.includes("/azure") ||
+    /(^|[^a-z0-9])azure([^a-z0-9]|$)/.test(pageTitle);
+
+  if (isAzure) return "azure-azure-com";
+
+  return "";
+}
+
 function getDomainLabel(domain = "") {
   const parts = String(domain || "").split(".").filter(Boolean);
   return parts[0] || "servicio";
@@ -87,7 +115,9 @@ function getDomainLabel(domain = "") {
 export function buildCatalogServiceSlug(report = {}) {
   const hostname = getReportHostname(report);
   const domain = getRegistrableDomain(hostname);
+  const hardcodedSlug = getHardcodedServiceSlug(report, hostname, domain);
 
+  if (hardcodedSlug) return hardcodedSlug;
   if (!domain) return "";
 
   const domainLabel = getDomainLabel(domain);
