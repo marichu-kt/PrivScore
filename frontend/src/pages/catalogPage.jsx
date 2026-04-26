@@ -31,6 +31,25 @@ function HeroIcon({ name }) {
         <path d="M8 17h6" />
       </>
     ),
+    gauge: (
+      <>
+        <path d="M4 14a8 8 0 0 1 16 0" />
+        <path d="M6.5 17a7 7 0 0 1-1.5-3" />
+        <path d="M19 14a7 7 0 0 1-1.5 3" />
+        <path d="m12 14 4-5" />
+        <path d="M8 14h.01" />
+        <path d="M12 6v2" />
+        <path d="M16 14h.01" />
+      </>
+    ),
+    grid: (
+      <>
+        <rect x="4" y="4" width="7" height="7" rx="1.5" />
+        <rect x="13" y="4" width="7" height="7" rx="1.5" />
+        <rect x="4" y="13" width="7" height="7" rx="1.5" />
+        <rect x="13" y="13" width="7" height="7" rx="1.5" />
+      </>
+    ),
     rights: (
       <>
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
@@ -44,6 +63,16 @@ function HeroIcon({ name }) {
         <path d="m9 12 2 2 4-5" />
       </>
     ),
+    target: (
+      <>
+        <circle cx="12" cy="12" r="8" />
+        <circle cx="12" cy="12" r="3" />
+        <path d="M12 2v4" />
+        <path d="M12 18v4" />
+        <path d="M2 12h4" />
+        <path d="M18 12h4" />
+      </>
+    ),
   };
 
   return (
@@ -54,11 +83,24 @@ function HeroIcon({ name }) {
 }
 
 function StatCard({ label, value, helper }) {
+  const iconByLabel = {
+    Cookies: "cookie",
+    "Score medio": "gauge",
+    "Servicios visibles": "grid",
+    "Trackers / terceros": "target",
+  };
+
   return (
-    <div className="statCard">
-      <div className="statLabel">{label}</div>
-      <div className="statValue">{value}</div>
-      <div className="statHelper">{helper}</div>
+    <div className="statCard" data-stat={iconByLabel[label]}>
+      <div className="statIcon">
+        <HeroIcon name={iconByLabel[label] || "grid"} />
+      </div>
+      <div className="statBody">
+        <div className="statLabel">{label}</div>
+        <div className="statValue">{value}</div>
+        <div className="statDivider" aria-hidden="true" />
+        <div className="statHelper">{helper}</div>
+      </div>
     </div>
   );
 }

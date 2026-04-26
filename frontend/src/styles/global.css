@@ -475,8 +475,94 @@ strong, h1, h2, h3, .title, .brandName, .nutriSegment { overflow-wrap: anywhere;
 .findingsGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .checkGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .statCard, .metricCard { padding: 22px; }
+.statCard {
+  position: relative;
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+  min-height: 142px;
+  padding: 22px 18px 22px 24px;
+  border-color: #dce4ef;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 14px 32px rgba(30, 47, 80, 0.09);
+}
+.statCard::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 5px;
+  background: #2f80ed;
+}
+.statCard::after {
+  content: "";
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 0 8px color-mix(in srgb, currentColor 14%, transparent);
+  opacity: 0.75;
+}
+.statCard[data-stat="grid"] .statIcon { background: rgba(31, 111, 235, 0.13); }
+.statCard[data-stat="gauge"] .statIcon { background: rgba(0, 150, 199, 0.14); }
+.statCard[data-stat="cookie"] .statIcon { background: rgba(124, 58, 237, 0.13); }
+.statCard[data-stat="target"] .statIcon { background: rgba(15, 159, 143, 0.14); }
+.statCard[data-stat="grid"] { color: #1f6feb; }
+.statCard[data-stat="gauge"] { color: #0096c7; }
+.statCard[data-stat="cookie"] { color: #7c3aed; }
+.statCard[data-stat="target"] { color: #0f9f8f; }
+.statCard[data-stat="grid"]::before { background: #1f6feb; }
+.statCard[data-stat="gauge"]::before { background: #0096c7; }
+.statCard[data-stat="cookie"]::before { background: #7c3aed; }
+.statCard[data-stat="target"]::before { background: #0f9f8f; }
+.statIcon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: color-mix(in srgb, currentColor 13%, #fff);
+}
+.statIcon .heroIconSvg {
+  width: 31px;
+  height: 31px;
+  stroke-width: 1.9;
+}
+.statBody {
+  display: grid;
+  min-width: 0;
+  gap: 8px;
+}
 .statLabel, .metricLabel, .microMeta, .tableHead, .partnerMeta, .noteBox { font-size: 0.92rem; color: var(--muted); }
+.statCard .statLabel {
+  color: #12213a;
+  font-size: 0.98rem;
+  font-weight: 900;
+}
 .statValue, .metricValue { margin-top: 8px; font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1; font-weight: 900; letter-spacing: -0.05em; }
+.statCard .statValue {
+  margin: 0;
+  color: #0c1d39;
+  font-size: clamp(1.75rem, 2.65vw, 2.42rem);
+  white-space: nowrap;
+  letter-spacing: -0.065em;
+}
+.statCard[data-stat="target"] .statValue {
+  font-size: clamp(1.48rem, 2.35vw, 2.12rem);
+}
+.statDivider {
+  width: 100%;
+  height: 1px;
+  background: #dfe6f0;
+}
+.statCard .statHelper {
+  color: #73819a;
+  font-size: 0.88rem;
+  font-weight: 650;
+}
 .controlPanel { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; padding: 18px; }
 .field { display: grid; gap: 8px; }
 .field label, .sectionCount, .sectionCardHead h2, .findingCard h3, .checkLabel, .subTitle { font-weight: 800; letter-spacing: -0.02em; }
@@ -1118,6 +1204,9 @@ strong, h1, h2, h3, .title, .brandName, .nutriSegment { overflow-wrap: anywhere;
   .heroBadge span { font-size: 1.05rem; }
   .heroIcon { width: 58px; height: 58px; }
   .heroPanel, .sectionCard, .detailHero, .serviceCard, .statCard, .metricCard { padding: 18px; border-radius: 20px; }
+  .statCard { grid-template-columns: 1fr; gap: 16px; min-height: 0; }
+  .statIcon { width: 68px; height: 68px; }
+  .statIcon .heroIconSvg { width: 38px; height: 38px; }
   .title { font-size: 1.3rem; }
   .heroPanel h1, .detailHero h1 { font-size: 2rem; }
   .detailIdentity { grid-template-columns: auto minmax(0, 1fr); }
