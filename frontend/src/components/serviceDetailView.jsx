@@ -484,27 +484,45 @@ export default function ServiceDetailView({ item, backTo = "/", backLabel = "Vol
           </div>
         </SectionCard>
 
-        <SectionCard title="Terceros y socios" subtitle="Herramientas integradas y proveedores asociados al tratamiento.">
-          <div className="partnerList">
+        <SectionCard
+          title="Terceros y socios"
+          subtitle="Herramientas integradas y proveedores asociados."
+          className="partnersSectionCard"
+        >
+          <div className="partnersShowcase">
             {item.trackers?.map((tracker) => (
-              <article key={`${tracker.name}-${tracker.company}`} className="partnerItem">
-                <div>
-                  <strong>{tracker.name}</strong>
-                  <p>{tracker.company}</p>
-                </div>
-                <div className="partnerMeta">
-                  <span className="softChip">{tracker.category}</span>
-                  <span>{tracker.purpose}</span>
+              <article key={`${tracker.name}-${tracker.company}`} className="partnerShowcaseItem">
+                <div className="partnerShowcaseMain">
+                  <div className="partnerNameBlock">
+                    <strong>{tracker.name}</strong>
+                    <p>{tracker.company}</p>
+                  </div>
+
+                  <div className="partnerShowcaseMeta">
+                    <span className="partnerCategoryPill">{tracker.category}</span>
+                    <span className="partnerPurpose">{tracker.purpose}</span>
+                  </div>
+
+                  <span className="partnerChevron" aria-hidden="true">›</span>
                 </div>
               </article>
             ))}
           </div>
 
-          <div className="chipCluster">
-            {item.sharedWith?.map((partner) => (
-              <span key={partner} className="softChip">{partner}</span>
-            ))}
-          </div>
+          {item.sharedWith?.length ? (
+            <div className="partnersSharedBlock">
+              <span className="partnersSharedDivider" aria-hidden="true" />
+
+              <div className="partnersSharedChips">
+                {item.sharedWith.map((partner) => (
+                  <span key={partner} className="partnerSharedChip">
+                    <span className="partnerSharedDot" aria-hidden="true" />
+                    {partner}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ) : null}
         </SectionCard>
       </div>
 

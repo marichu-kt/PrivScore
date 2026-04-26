@@ -2013,3 +2013,230 @@ strong, h1, h2, h3, .title, .brandName, .nutriSegment { overflow-wrap: anywhere;
 .analysisBanner strong { font-size: 0.98rem; }
 .compactList { margin-top: 2px; gap: 6px; }
 .compactPartners { gap: 0; }
+
+
+/* Enhanced third-party partners section */
+.partnersSectionCard {
+  padding: clamp(24px, 3vw, 40px);
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.97);
+  border-color: #dce4ef;
+  box-shadow: 0 18px 42px rgba(30, 47, 80, 0.1);
+}
+
+.partnersSectionCard .sectionCardHead {
+  display: block;
+  margin-bottom: 26px;
+}
+
+.partnersSectionCard .sectionCardHead h2 {
+  color: #071a34;
+  font-size: clamp(2.1rem, 4vw, 3.25rem);
+  line-height: 1;
+  letter-spacing: -0.06em;
+}
+
+.partnersSectionCard .sectionCardHead p {
+  margin-top: 16px;
+  color: #31415f;
+  font-size: clamp(1.05rem, 1.55vw, 1.28rem);
+  line-height: 1.4;
+}
+
+.partnersShowcase {
+  display: grid;
+  gap: 18px;
+}
+
+.partnerShowcaseItem {
+  --partner-accent: #5661e8;
+  position: relative;
+  overflow: hidden;
+  padding: 24px 26px;
+  border-radius: 22px;
+  background: #fff;
+  border: 1px solid #dce4ef;
+  box-shadow: 0 12px 28px rgba(18, 33, 58, 0.08);
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.partnerShowcaseItem:nth-child(2n) {
+  --partner-accent: #0f8ea2;
+}
+
+.partnerShowcaseItem:nth-child(3n) {
+  --partner-accent: #7c5bd8;
+}
+
+.partnerShowcaseItem::before {
+  content: "";
+  position: absolute;
+  inset: 22px auto 22px 0;
+  width: 4px;
+  border-radius: 0 999px 999px 0;
+  background: var(--partner-accent);
+}
+
+.partnerShowcaseItem:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--partner-accent) 28%, #dce4ef);
+  box-shadow: 0 18px 36px rgba(18, 33, 58, 0.12);
+}
+
+.partnerShowcaseMain {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 0.85fr) auto;
+  align-items: center;
+  gap: 20px;
+}
+
+.partnerNameBlock {
+  min-width: 0;
+}
+
+.partnerNameBlock strong {
+  display: block;
+  color: #071a34;
+  font-size: clamp(1.45rem, 2.4vw, 2rem);
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+}
+
+.partnerNameBlock p {
+  margin: 10px 0 0;
+  color: #475a79;
+  font-size: 1.08rem;
+  line-height: 1.35;
+}
+
+.partnerShowcaseMeta {
+  display: grid;
+  justify-items: end;
+  text-align: right;
+  gap: 12px;
+}
+
+.partnerCategoryPill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 20px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #f1f3ff, #e9edff);
+  color: #2637a4;
+  border: 1px solid #dfe5ff;
+  font-size: 1rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.partnerPurpose {
+  color: #1f2f49;
+  font-size: 1.02rem;
+  line-height: 1.4;
+  font-weight: 650;
+}
+
+.partnerChevron {
+  color: #73819a;
+  font-size: 2.35rem;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.partnersSharedBlock {
+  margin-top: 28px;
+}
+
+.partnersSharedDivider {
+  display: block;
+  height: 1px;
+  margin-bottom: 22px;
+  background: #dfe6f0;
+}
+
+.partnersSharedChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.partnerSharedChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 18px;
+  border-radius: 18px;
+  background: #f1f4ff;
+  color: #14223d;
+  border: 1px solid #dfe6ff;
+  font-weight: 800;
+  box-shadow: 0 8px 18px rgba(18, 33, 58, 0.05);
+}
+
+.partnerSharedDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #5661e8;
+  box-shadow: 0 0 0 5px rgba(86, 97, 232, 0.11);
+}
+
+.partnerSharedChip:nth-child(2n) .partnerSharedDot {
+  background: #0f8ea2;
+  box-shadow: 0 0 0 5px rgba(15, 142, 162, 0.11);
+}
+
+@media (max-width: 1100px) {
+  .partnerShowcaseMain {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 18px;
+  }
+
+  .partnerShowcaseMeta {
+    justify-items: start;
+    text-align: left;
+  }
+
+  .partnerChevron {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+  }
+}
+
+@media (max-width: 720px) {
+  .partnersSectionCard {
+    padding: 22px;
+    border-radius: 24px;
+  }
+
+  .partnersSectionCard .sectionCardHead h2 {
+    font-size: 2rem;
+  }
+
+  .partnersSectionCard .sectionCardHead p {
+    font-size: 1rem;
+  }
+
+  .partnerShowcaseItem {
+    padding: 22px;
+    border-radius: 20px;
+  }
+
+  .partnerNameBlock strong {
+    font-size: 1.35rem;
+  }
+
+  .partnerCategoryPill,
+  .partnerSharedChip {
+    min-height: 42px;
+  }
+
+  .partnerChevron {
+    display: none;
+  }
+}
