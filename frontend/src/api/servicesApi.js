@@ -1,5 +1,8 @@
-import { catalogServices } from "../data/catalogServices";
-import { servicesMock } from "../data/services.mock";
+import * as catalogServicesModule from "../data/catalogServices";
+import * as servicesMockModule from "../data/services.mock";
+
+const catalogServices = catalogServicesModule.catalogServices || catalogServicesModule.default || [];
+const servicesMock = servicesMockModule.servicesMock || servicesMockModule.default || [];
 
 const USE_BACKEND = false;
 
@@ -140,7 +143,7 @@ function makePolicyLinks(domain) {
 
 function makeFallbackService(id) {
   const { name, domain } = parseGeneratedServiceId(id);
-  const template = cloneValue(servicesMock.find((service) => service.rating === "C") || servicesMock[0]);
+  const template = cloneValue(servicesMock.find((service) => service.rating === "C") || servicesMock[0] || {});
 
   return {
     ...template,
