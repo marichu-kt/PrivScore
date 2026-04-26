@@ -133,14 +133,58 @@ strong, h1, h2, h3, .title, .brandName, .nutriSegment { overflow-wrap: anywhere;
 .sectionHeader h2, .sectionCardHead h2 { margin: 0; font-size: 1.45rem; }
 .sectionHeader p, .sectionCardHead p { margin: 6px 0 0; }
 .sectionCount { padding: 10px 14px; border-radius: 999px; background: rgba(80, 98, 244, 0.08); }
-.serviceCard { padding: 22px; display: grid; gap: 18px; transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease; min-width: 0; }
-.serviceCard:hover { transform: translateY(-3px); border-color: rgba(80, 98, 244, 0.22); box-shadow: 0 18px 44px rgba(24, 39, 75, 0.12); }
+.serviceCard {
+  --card-accent: var(--brand);
+  position: relative;
+  padding: 24px;
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+  background: #fff;
+  border-color: #cfd8e7;
+  box-shadow: 0 12px 34px rgba(18, 33, 58, 0.1);
+  transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
+}
+.serviceCard[data-rating="A"] { --card-accent: var(--grade-a); }
+.serviceCard[data-rating="B"] { --card-accent: var(--grade-b); }
+.serviceCard[data-rating="C"] { --card-accent: var(--grade-c); }
+.serviceCard[data-rating="D"] { --card-accent: var(--grade-d); }
+.serviceCard[data-rating="E"] { --card-accent: var(--grade-e); }
+.serviceCard::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 5px;
+  background: var(--card-accent);
+}
+.serviceCard:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--card-accent) 42%, #cfd8e7);
+  box-shadow: 0 18px 46px rgba(18, 33, 58, 0.16);
+}
+.serviceCard:focus-within {
+  outline: 3px solid color-mix(in srgb, var(--card-accent) 34%, transparent);
+  outline-offset: 3px;
+}
 .leftRow, .detailIdentity, .ratingStack, .titleWrap, .scorePanel, .stackBlock, .heroContent, .scoreBreakdown, .cookieCategoryList, .partnerList, .termsList, .linkList, .dataTable, .nutriScore {
   display: grid; gap: 12px;
 }
 .ratingStack { justify-items: end; }
+.serviceCard .serviceCardTop {
+  gap: 18px;
+  align-items: flex-start;
+}
+.serviceCard .leftRow {
+  align-items: flex-start;
+}
 .leftRow { grid-template-columns: auto minmax(0, 1fr); align-items: center; }
 .serviceLogo { width: 52px; height: 52px; border-radius: 16px; background: #fff; border: 1px solid var(--line); }
+.serviceCard .serviceLogo {
+  width: 58px;
+  height: 58px;
+  border-color: #c9d4e5;
+  box-shadow: 0 10px 22px rgba(18, 33, 58, 0.12);
+}
 .detailLogo { width: 74px; height: 74px; border-radius: 22px; border: 1px solid var(--line); background: #fff; }
 
 .logoMark {
@@ -185,31 +229,76 @@ strong, h1, h2, h3, .title, .brandName, .nutriSegment { overflow-wrap: anywhere;
   padding: 0 12px; border-radius: 999px; font-size: 0.92rem;
 }
 .categoryChip { background: rgba(18, 33, 58, 0.06); color: #394965; font-weight: 700; }
+.serviceCard .categoryChip {
+  background: #e9eef7;
+  color: #182944;
+  font-weight: 800;
+}
 .microMeta { font-weight: 600; }
+.serviceCard .microMeta { color: #40506b; }
 .title { margin: 0; font-size: 1.55rem; line-height: 1.05; letter-spacing: -0.04em; }
+.serviceCard .title { color: #071a34; }
 .meta { color: var(--muted); overflow-wrap: anywhere; }
+.serviceCard .meta { color: #475a79; }
 .summary { margin: 0; font-size: 1rem; }
+.serviceCard .summary {
+  color: #40506b;
+  font-size: 1.02rem;
+  line-height: 1.65;
+}
 .detailSummary { max-width: 76ch; }
 .toneChip { font-weight: 700; }
-.toneChip.good { color: var(--tone-good-text); background: var(--tone-good-bg); }
-.toneChip.neutral { color: var(--tone-neutral-text); background: var(--tone-neutral-bg); }
-.toneChip.warn { color: var(--tone-warn-text); background: var(--tone-warn-bg); }
-.toneChip.alert { color: var(--tone-alert-text); background: var(--tone-alert-bg); }
+.toneChip.good { color: #08743d; background: rgba(23, 169, 92, 0.16); }
+.toneChip.neutral { color: #3f4e66; background: rgba(100, 116, 139, 0.14); }
+.toneChip.warn { color: #895000; background: rgba(241, 163, 43, 0.2); }
+.toneChip.alert { color: #a52e2e; background: rgba(227, 74, 74, 0.16); }
 .metricPills, .heroChips, .highlightList, .chipCluster { display: flex; gap: 10px; flex-wrap: wrap; }
 .metricPill, .softChip { min-height: 38px; border-radius: 14px; padding: 0 12px; }
 .metricPill {
   align-items: center; justify-content: space-between; min-width: 122px; background: var(--bg-soft);
   border: 1px solid rgba(205, 214, 228, 0.7); font-weight: 700; gap: 10px;
 }
+.serviceCard .metricPills { gap: 12px; }
+.serviceCard .metricPill {
+  min-width: 128px;
+  min-height: 40px;
+  background: #f5f8fc;
+  border-color: #cdd8e8;
+  color: #152844;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
 .metricPill strong { font-size: 1.02rem; }
+.serviceCard .metricPill strong { color: #06172d; }
 .softChip { background: rgba(80, 98, 244, 0.08); color: #33428d; }
 .softChip.strong { background: rgba(18, 33, 58, 0.08); color: #17274b; }
+.serviceCard .softChip {
+  min-height: 36px;
+  background: #eef3ff;
+  color: #18348f;
+  border: 1px solid #dbe5ff;
+  font-weight: 650;
+}
 .cardFooter { align-items: center; gap: 18px; }
+.serviceCard .cardFooter {
+  padding-top: 16px;
+  border-top: 1px solid #dbe3f0;
+}
 .miniText { color: var(--muted); line-height: 1.5; }
+.serviceCard .miniText {
+  color: #40506b;
+  max-width: 58ch;
+}
+.serviceCard .miniText strong { color: #243650; }
 .primaryButton {
   white-space: nowrap; min-height: 46px; padding: 0 18px; border-radius: 16px; display: inline-flex;
   align-items: center; justify-content: center; background: var(--brand); color: #fff; font-weight: 800;
   box-shadow: 0 12px 24px rgba(80, 98, 244, 0.22);
+}
+.serviceCard .primaryButton {
+  min-height: 48px;
+  padding: 0 22px;
+  background: #3848e8;
+  box-shadow: 0 12px 22px rgba(56, 72, 232, 0.24);
 }
 .primaryButton:hover { filter: brightness(1.03); }
 .backLink { display: inline-flex; width: fit-content; align-items: center; gap: 8px; color: #46556f; font-weight: 800; padding: 10px 14px; border-radius: 14px; }
@@ -310,11 +399,317 @@ strong, h1, h2, h3, .title, .brandName, .nutriSegment { overflow-wrap: anywhere;
 .nutriScore--hero .nutriSegment { min-height: 82px; font-size: clamp(2.1rem, 3vw, 2.7rem); }
 .nutriScore--hero .nutriSegment.is-active { box-shadow: 0 0 0 6px #fff, 0 16px 30px rgba(18, 33, 58, 0.16); }
 
+.serviceIcon {
+  width: 1.2em;
+  height: 1.2em;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.15;
+}
+
+.serviceCard {
+  padding: 24px;
+  gap: 18px;
+  border-color: #d9e2ef;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(80, 98, 244, 0.08), transparent 28%),
+    #fff;
+  box-shadow: 0 18px 42px rgba(30, 47, 80, 0.12);
+}
+
+.serviceCard::before {
+  height: 6px;
+}
+
+.serviceCard .serviceCardTop {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(172px, 210px);
+  align-items: start;
+  gap: 18px;
+}
+
+.serviceIdentity {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 14px;
+}
+
+.serviceCard .serviceLogo {
+  width: 66px;
+  height: 66px;
+  border-radius: 18px;
+  border-color: #d6dfed;
+  box-shadow: 0 18px 36px rgba(18, 33, 58, 0.13);
+}
+
+.serviceCard .titleWrap {
+  align-content: start;
+  gap: 8px;
+}
+
+.serviceCard .eyebrowRow {
+  gap: 8px;
+}
+
+.serviceCard .categoryChip,
+.serviceCard .microMeta,
+.serviceCard .meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.serviceCard .categoryChip {
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid #d5ddff;
+  background: #edf3ff;
+  color: #2142c7;
+  font-size: 0.9rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+.serviceCard .microMeta {
+  color: #66758f;
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.serviceCard .title {
+  margin-top: 2px;
+  color: #06172f;
+  font-size: clamp(1.45rem, 2.4vw, 1.9rem);
+  letter-spacing: -0.06em;
+}
+
+.serviceCard .meta {
+  width: fit-content;
+  color: #66758f;
+  font-size: 0.98rem;
+}
+
+.serviceCard .ratingStack {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 10px;
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #d9e2ef;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85), 0 16px 34px rgba(18, 33, 58, 0.08);
+}
+
+.serviceCard .ratingStack .nutriScore {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #dce4ef;
+}
+
+.serviceCard .nutriScore--compact {
+  width: 100%;
+}
+
+.serviceCard .nutriScore--compact .nutriScorePlate {
+  padding: 0;
+  border: 0;
+  border-radius: 18px;
+  box-shadow: none;
+}
+
+.serviceCard .nutriScore--compact .nutriScoreTrack {
+  padding: 0;
+}
+
+.serviceCard .nutriScore--compact .nutriSegment {
+  min-height: 32px;
+  font-size: 0.98rem;
+}
+
+.serviceCard .nutriScore--compact .nutriScoreMeta {
+  justify-content: center;
+  gap: 6px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.serviceCard .nutriScore--compact .nutriScoreMeta strong {
+  color: #06172f;
+  font-size: 1.45rem;
+  line-height: 0.95;
+}
+
+.serviceCard .nutriScore--compact .nutriScoreMeta span {
+  color: #66758f;
+  font-size: 0.88rem;
+}
+
+.serviceCard .toneChip {
+  width: 100%;
+  min-height: 38px;
+  gap: 8px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: 900;
+}
+
+.serviceCard .toneChip .serviceIcon {
+  width: 1.2em;
+  height: 1.2em;
+}
+
+.serviceCard .summary {
+  max-width: none;
+  color: #253552;
+  font-size: 1rem;
+  line-height: 1.58;
+}
+
+.serviceCard .metricPills {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.serviceCard .metricPill {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  min-width: 0;
+  min-height: 68px;
+  padding: 12px 14px;
+  border: 1px solid #d9e2ef;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.86);
+  color: #2f4fd6;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 10px 24px rgba(18, 33, 58, 0.06);
+}
+
+.serviceCard .metricPill .serviceIcon {
+  width: 32px;
+  height: 32px;
+}
+
+.metricPillText {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.metricPillText span {
+  color: #12213a;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.serviceCard .metricPill strong {
+  color: #2f4fd6;
+  font-size: 1.15rem;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+}
+
+.serviceCard .highlightList {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.serviceCard .softChip {
+  min-height: 40px;
+  gap: 8px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 999px;
+  background: #edf4ff;
+  color: #2447c8;
+  font-size: 0.88rem;
+  font-weight: 750;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+}
+
+.serviceCard .softChip .serviceIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.serviceCard .cardFooter {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18px;
+  padding-top: 16px;
+  border-top: 1px solid #dce4ef;
+}
+
+.serviceCard .miniText {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+  max-width: none;
+  color: #253552;
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.serviceCard .miniText strong {
+  color: #18a052;
+  font-size: 1rem;
+}
+
+.favorIcon {
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #e3f8eb;
+  color: #16a052;
+}
+
+.favorIcon .serviceIcon {
+  width: 26px;
+  height: 26px;
+}
+
+.serviceCard .primaryButton {
+  min-width: 174px;
+  min-height: 48px;
+  gap: 10px;
+  padding: 0 18px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #4052ff, #2f43e6);
+  color: #fff;
+  font-size: 0.98rem;
+  box-shadow: 0 18px 30px rgba(47, 67, 230, 0.28);
+}
+
+.serviceCard .primaryButton .serviceIcon {
+  width: 22px;
+  height: 22px;
+}
+
 @media (max-width: 1100px) {
   .heroPanel, .detailHero, .catalogGrid, .twoCols, .metricsGrid, .statsGrid, .findingsGrid, .controlPanel { grid-template-columns: 1fr; }
   .cardFooter, .serviceCardTop, .sectionHeader, .partnerItem, .tableHead, .tableRow, .nutriScoreMeta { flex-direction: column; align-items: flex-start; }
   .ratingStack { width: 100%; }
   .nutriScore--compact { width: 100%; }
+  .serviceCard { padding: 34px 30px 28px; }
+  .serviceCard .serviceCardTop { grid-template-columns: 1fr; gap: 28px; }
+  .serviceIdentity { gap: 24px; }
+  .serviceCard .serviceLogo { width: 112px; height: 112px; border-radius: 24px; }
+  .serviceCard .ratingStack { width: 100%; max-width: none; }
+  .serviceCard .metricPills { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .serviceCard .highlightList { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .serviceCard .cardFooter { grid-template-columns: 1fr; }
+  .serviceCard .primaryButton { width: 100%; min-width: 0; }
   .partnerMeta { justify-items: start; text-align: left; }
   .tableHead { display: none; }
   .tableRow { padding: 16px; border: 1px solid var(--line); border-radius: 18px; margin-top: 10px; }
@@ -340,6 +735,23 @@ strong, h1, h2, h3, .title, .brandName, .nutriSegment { overflow-wrap: anywhere;
   .nutriScore--compact .nutriSegment { min-height: 42px; font-size: 1.18rem; }
   .nutriScore--large .nutriSegment, .nutriScore--hero .nutriSegment { min-height: 58px; font-size: 1.55rem; }
   .nutriSegment.is-active { box-shadow: 0 0 0 4px #fff, 0 12px 24px rgba(18, 33, 58, 0.14); }
+  .serviceCard { padding: 30px 20px 24px; gap: 22px; }
+  .serviceIdentity { grid-template-columns: 1fr; gap: 18px; }
+  .serviceCard .serviceLogo { width: 86px; height: 86px; border-radius: 20px; }
+  .serviceCard .eyebrowRow { gap: 10px; }
+  .serviceCard .categoryChip { min-height: 40px; padding: 0 14px; font-size: 0.92rem; }
+  .serviceCard .microMeta, .serviceCard .meta { font-size: 0.95rem; }
+  .serviceCard .title { font-size: 2rem; }
+  .serviceCard .summary { font-size: 1rem; }
+  .serviceCard .ratingStack { padding: 18px; border-radius: 20px; }
+  .serviceCard .metricPills, .serviceCard .highlightList { grid-template-columns: 1fr; gap: 14px; }
+  .serviceCard .metricPill { min-height: 92px; padding: 18px; }
+  .serviceCard .metricPill .serviceIcon { width: 42px; height: 42px; }
+  .serviceCard .softChip { min-height: 52px; padding: 0 18px; font-size: 0.98rem; }
+  .serviceCard .miniText { grid-template-columns: 1fr; gap: 14px; font-size: 1rem; }
+  .favorIcon { width: 58px; height: 58px; }
+  .favorIcon .serviceIcon { width: 30px; height: 30px; }
+  .serviceCard .primaryButton { min-height: 58px; font-size: 1rem; border-radius: 16px; }
 }
 
 
