@@ -1380,6 +1380,208 @@ strong, h1, h2, h3, .title, .brandName, .nutriSegment { overflow-wrap: anywhere;
   background: rgba(18, 33, 58, 0.06); font-weight: 700;
 }
 .noteBox { margin-top: 6px; padding: 16px; border-radius: 18px; background: rgba(80, 98, 244, 0.06); border: 1px solid rgba(80, 98, 244, 0.1); }
+.termsLegalCard,
+.legalLinksCard {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.97);
+  border-color: #dce4ef;
+  box-shadow: 0 18px 42px rgba(30, 47, 80, 0.1);
+}
+.termsLegalGrid {
+  align-items: stretch;
+  grid-auto-rows: 1fr;
+}
+.termsLegalGrid > .sectionCard {
+  height: 100%;
+}
+.termsLegalCard .sectionCardHead,
+.legalLinksCard .sectionCardHead {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+.termsLegalCard .sectionCardIcon,
+.legalLinksCard .sectionCardIcon {
+  width: 74px;
+  height: 74px;
+  border-radius: 20px;
+  color: #2f65d8;
+  background: #eef4ff;
+  border-color: #dce8ff;
+}
+.termsLegalCard .sectionCardIcon .detailIcon,
+.legalLinksCard .sectionCardIcon .detailIcon {
+  width: 44px;
+  height: 44px;
+}
+.termsLegalCard .sectionCardHead h2,
+.legalLinksCard .sectionCardHead h2 {
+  color: #0c1d39;
+  font-size: clamp(1.8rem, 2.8vw, 2.85rem);
+  line-height: 1;
+  letter-spacing: -0.055em;
+}
+.termsLegalCard .sectionCardHead p,
+.legalLinksCard .sectionCardHead p {
+  color: #34425e;
+  font-size: 1.12rem;
+  line-height: 1.45;
+}
+.termsLegalCard .termsList {
+  flex: 1;
+  gap: 18px;
+}
+.termsLegalCard .termsItem {
+  display: grid;
+  grid-template-columns: 78px minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+  min-height: 104px;
+  padding: 22px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid #dfe6f0;
+  box-shadow: 0 12px 24px rgba(18, 33, 58, 0.06);
+}
+.termsLegalCard .termsItemIcon {
+  display: grid;
+  place-items: center;
+  width: 70px;
+  height: 70px;
+  border-radius: 999px;
+  color: #2f65d8;
+  background: #eef4ff;
+}
+.termsLegalCard .termsItem:nth-child(2) .termsItemIcon {
+  color: #149653;
+  background: #eefbf3;
+}
+.termsLegalCard .termsItem:nth-child(3) .termsItemIcon {
+  color: #8747e8;
+  background: #f4edff;
+}
+.termsLegalCard .termsItemIcon .detailIcon {
+  width: 42px;
+  height: 42px;
+}
+.termsLegalCard .termsItem p {
+  color: #0c1d39;
+  font-size: clamp(1.05rem, 1.4vw, 1.35rem);
+  line-height: 1.45;
+  font-weight: 850;
+}
+.legalLinksCard .linkList {
+  display: grid;
+  flex: 1;
+  align-content: start;
+  gap: 16px;
+}
+.legalLinksCard .linkList a {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 22px;
+  min-height: 76px;
+  padding: 14px 22px;
+  border-radius: 18px;
+  color: #0c1d39;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid #cfe0ff;
+  box-shadow: 0 10px 22px rgba(47, 101, 216, 0.06);
+  font-size: 1.12rem;
+  font-weight: 900;
+  overflow: hidden;
+  transition: transform 0.18s ease, color 0.18s ease, background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.legalLinksCard .linkList a::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0;
+  background: rgba(255, 255, 255, 0.24);
+  transition: width 0.18s ease;
+}
+.legalLinksCard .linkList a:hover,
+.legalLinksCard .linkList a:focus-visible {
+  color: #fff;
+  background: linear-gradient(135deg, #265fda 0%, #4968ff 100%);
+  border-color: #265fda;
+  box-shadow: 0 20px 34px rgba(38, 95, 218, 0.32);
+  transform: translateY(-4px) scale(1.012);
+  outline: none;
+}
+.legalLinksCard .linkList a:hover::before,
+.legalLinksCard .linkList a:focus-visible::before {
+  width: 8px;
+}
+.legalLinksCard .linkList a > .detailIcon:last-child {
+  width: 32px;
+  height: 32px;
+  color: #386bff;
+  stroke-width: 2.2;
+  transition: transform 0.18s ease, color 0.18s ease;
+}
+.legalLinksCard .linkList a:hover > .detailIcon:last-child,
+.legalLinksCard .linkList a:focus-visible > .detailIcon:last-child {
+  color: #fff;
+  transform: translate(4px, -4px);
+}
+.legalLinkIcon {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+  color: #386bff;
+  background: #eef4ff;
+  transition: color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+}
+.legalLinksCard .linkList a:hover .legalLinkIcon,
+.legalLinksCard .linkList a:focus-visible .legalLinkIcon {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.18);
+  transform: scale(1.06);
+}
+.legalLinkIcon .detailIcon {
+  width: 30px;
+  height: 30px;
+}
+.legalLinksCard .noteBox {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+  margin-top: auto;
+  padding: 20px 24px;
+  border-radius: 20px;
+  color: #1c377a;
+  background: #eef3ff;
+  border: 1px solid #d7e2ff;
+  font-size: 1.04rem;
+  line-height: 1.45;
+  font-weight: 650;
+}
+.legalNoteIcon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  color: #386bff;
+  border-right: 1px solid #cad7f4;
+}
+.legalNoteIcon .detailIcon {
+  width: 34px;
+  height: 34px;
+}
+.legalNoteIcon + span {
+  padding-left: 2px;
+}
 .emptyState, .loadingState { padding: 34px; text-align: center; }
 .emptyState h3, .loadingState { margin: 0; font-size: 1.2rem; font-weight: 800; }
 

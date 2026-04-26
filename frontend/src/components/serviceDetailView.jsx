@@ -77,12 +77,47 @@ function DetailIcon({ name }) {
         <path d="M8 11h3" />
       </>
     ),
+    fileText: (
+      <>
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
+        <path d="M14 2v6h6" />
+        <path d="M8 13h8" />
+        <path d="M8 17h6" />
+      </>
+    ),
+    info: (
+      <>
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 16v-4" />
+        <path d="M12 8h.01" />
+      </>
+    ),
     list: (
       <>
         <rect x="5" y="5" width="14" height="14" rx="2" />
         <path d="M8 9h8" />
         <path d="M8 13h8" />
         <path d="M8 17h5" />
+      </>
+    ),
+    lock: (
+      <>
+        <rect x="5" y="11" width="14" height="10" rx="2" />
+        <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+        <path d="M12 15v2" />
+      </>
+    ),
+    muted: (
+      <>
+        <path d="M11 5 6 9H3v6h3l5 4V5Z" />
+        <path d="m16 9 5 5" />
+        <path d="m21 9-5 5" />
+      </>
+    ),
+    outbound: (
+      <>
+        <path d="M7 17 17 7" />
+        <path d="M8 7h9v9" />
       </>
     ),
     shield: (
@@ -139,6 +174,14 @@ function DetailIcon({ name }) {
         <path d="M15 16h6" />
         <path d="M17 16v-2h2v2" />
         <path d="m20 16-.5 5h-3l-.5-5" />
+      </>
+    ),
+    userCheck: (
+      <>
+        <circle cx="10" cy="8" r="4" />
+        <path d="M3.5 21a6.5 6.5 0 0 1 10.2-5.4" />
+        <circle cx="17" cy="17" r="4" />
+        <path d="m15.4 17 1.1 1.1 2.2-2.5" />
       </>
     ),
     users: (
@@ -210,6 +253,12 @@ export default function ServiceDetailView({ item, backTo = "/", backLabel = "Vol
   const catalogStatus = item.rank ? `Catálogo · top ${item.rank}` : item.reviewStatus;
   const highlights = item.privacyHighlights?.slice(0, 3) || [];
   const findingIcons = ["fileCheck", "bar", "clock"];
+  const termsIcons = ["shield", "userCheck", "muted"];
+  const legalLinks = [
+    { label: "Política de privacidad", href: item.policyLinks?.privacy, icon: "lock" },
+    { label: "Términos y condiciones", href: item.policyLinks?.terms, icon: "fileText" },
+    { label: "Política de cookies", href: item.policyLinks?.cookies, icon: "cookie" },
+  ];
 
   return (
     <div className="detailPage">
@@ -284,6 +333,52 @@ export default function ServiceDetailView({ item, backTo = "/", backLabel = "Vol
         <MetricCard label="Última revisión" value={formatDateTime(item.updatedAt)} helper="Fecha visible de ficha" />
       </section>
 
+      <div className="twoCols termsLegalGrid">
+        <SectionCard
+          title="Términos y condiciones"
+          className="termsLegalCard"
+          icon={<DetailIcon name="fileCheck" />}
+        >
+          <div className="termsList">
+            {item.termsHighlights?.map((entry, index) => (
+              <article key={entry} className="termsItem">
+                <span className="termsItemIcon">
+                  <DetailIcon name={termsIcons[index] || "fileCheck"} />
+                </span>
+                <p>{entry}</p>
+              </article>
+            ))}
+          </div>
+        </SectionCard>
+
+        <SectionCard
+          title="Enlaces legales"
+          className="legalLinksCard"
+          icon={<DetailIcon name="shield" />}
+        >
+          <div className="linkList">
+            {legalLinks.map((link) => (
+              <a key={link.label} href={link.href} target="_blank" rel="noreferrer">
+                <span className="legalLinkIcon">
+                  <DetailIcon name={link.icon} />
+                </span>
+                <span>{link.label}</span>
+                <DetailIcon name="outbound" />
+              </a>
+            ))}
+          </div>
+          <div className="noteBox">
+            <span className="legalNoteIcon">
+              <DetailIcon name="info" />
+            </span>
+            <span>
+              Revisa estos documentos junto con el banner de consentimiento, la configuración de cuenta
+              y el comportamiento real del servicio en el navegador.
+            </span>
+          </div>
+        </SectionCard>
+      </div>
+
       <div className="twoCols">
         <SectionCard
           title="Desglose del score"
@@ -334,7 +429,6 @@ export default function ServiceDetailView({ item, backTo = "/", backLabel = "Vol
 
       <SectionCard
         title="Hallazgos clave"
-        subtitle="Aspectos e indicadores importantes de datos del servicio"
         className="findingsSectionCard"
       >
         <div className="findingsGrid">
@@ -509,30 +603,6 @@ export default function ServiceDetailView({ item, backTo = "/", backLabel = "Vol
         </SectionCard>
       </div>
 
-      <div className="twoCols alignStart">
-        <SectionCard title="Términos y condiciones" subtitle="Puntos contractuales que conviene revisar junto a la política de privacidad.">
-          <div className="termsList">
-            {item.termsHighlights?.map((entry) => (
-              <article key={entry} className="termsItem">
-                <span className="termsDot" />
-                <p>{entry}</p>
-              </article>
-            ))}
-          </div>
-        </SectionCard>
-
-        <SectionCard title="Enlaces legales" subtitle="Accesos directos a la documentación principal del servicio.">
-          <div className="linkList">
-            <a href={item.policyLinks?.privacy} target="_blank" rel="noreferrer">Política de privacidad</a>
-            <a href={item.policyLinks?.terms} target="_blank" rel="noreferrer">Términos y condiciones</a>
-            <a href={item.policyLinks?.cookies} target="_blank" rel="noreferrer">Política de cookies</a>
-          </div>
-          <div className="noteBox">
-            Revisa estos documentos junto con el banner de consentimiento, la configuración de cuenta
-            y el comportamiento real del servicio en el navegador.
-          </div>
-        </SectionCard>
-      </div>
     </div>
   );
 }
