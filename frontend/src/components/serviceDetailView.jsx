@@ -26,6 +26,16 @@ function DetailIcon({ name }) {
         <path d="M16 17h.01" />
       </>
     ),
+    controls: (
+      <>
+        <path d="M4 7h10" />
+        <path d="M18 7h2" />
+        <circle cx="16" cy="7" r="2" />
+        <path d="M4 17h2" />
+        <path d="M10 17h10" />
+        <circle cx="8" cy="17" r="2" />
+      </>
+    ),
     check: (
       <>
         <circle cx="12" cy="12" r="10" />
@@ -40,10 +50,25 @@ function DetailIcon({ name }) {
         <path d="M8.5 17.5h.01" />
       </>
     ),
+    download: (
+      <>
+        <path d="M12 3v12" />
+        <path d="m7 10 5 5 5-5" />
+        <path d="M5 21h14" />
+      </>
+    ),
     eye: (
       <>
         <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z" />
         <circle cx="12" cy="12" r="3" />
+      </>
+    ),
+    list: (
+      <>
+        <rect x="5" y="5" width="14" height="14" rx="2" />
+        <path d="M8 9h8" />
+        <path d="M8 13h8" />
+        <path d="M8 17h5" />
       </>
     ),
     shield: (
@@ -59,6 +84,13 @@ function DetailIcon({ name }) {
         <path d="M12 7v5l3 2" />
         <rect x="14" y="14" width="7" height="6" rx="1.5" />
         <path d="M16 14v-1a2 2 0 0 1 4 0v1" />
+      </>
+    ),
+    scorebars: (
+      <>
+        <path d="M5 19V9" />
+        <path d="M12 19V5" />
+        <path d="M19 19v-7" />
       </>
     ),
     target: (
@@ -84,6 +116,15 @@ function DetailIcon({ name }) {
       <>
         <circle cx="12" cy="8" r="4" />
         <path d="M5 21a7 7 0 0 1 14 0" />
+      </>
+    ),
+    userTrash: (
+      <>
+        <circle cx="10" cy="8" r="4" />
+        <path d="M3.5 21a6.5 6.5 0 0 1 9.5-5.8" />
+        <path d="M15 16h6" />
+        <path d="M17 16v-2h2v2" />
+        <path d="m20 16-.5 5h-3l-.5-5" />
       </>
     ),
     users: (
@@ -134,12 +175,15 @@ function MetricCard({ label, value, helper }) {
   );
 }
 
-function SectionCard({ title, subtitle, children, className = "" }) {
+function SectionCard({ title, subtitle, children, className = "", icon = null }) {
   return (
     <section className={`sectionCard ${className}`.trim()}>
       <div className="sectionCardHead">
-        <h2>{title}</h2>
-        {subtitle ? <p>{subtitle}</p> : null}
+        {icon ? <span className="sectionCardIcon">{icon}</span> : null}
+        <div>
+          <h2>{title}</h2>
+          {subtitle ? <p>{subtitle}</p> : null}
+        </div>
       </div>
       {children}
     </section>
@@ -226,29 +270,47 @@ export default function ServiceDetailView({ item, backTo = "/", backLabel = "Vol
       </section>
 
       <div className="twoCols">
-        <SectionCard title="Desglose del score" subtitle="Lectura por bloques para entender la nota final.">
+        <SectionCard
+          title="Desglose del score"
+          subtitle="Lectura por bloques para entender la nota final."
+          className="scoreBreakdownCard"
+          icon={<DetailIcon name="scorebars" />}
+        >
           <div className="scoreBreakdown">
-            {item.scoreBreakdown?.map((block) => (
-              <div className="scoreRow" key={block.label}>
-                <div className="scoreRowTop">
-                  <strong>{block.label}</strong>
-                  <span>{block.value}/100</span>
+            {item.scoreBreakdown?.map((block, index) => (
+              <article className="scoreRow" key={block.label}>
+                <span className="scoreRowIndex">{String(index + 1).padStart(2, "0")}</span>
+                <div className="scoreRowBody">
+                  <div className="scoreRowTop">
+                    <strong>{block.label}</strong>
+                    <span>{block.value}/100</span>
+                  </div>
+                  <p>{block.note}</p>
+                  <div className="progressTrack">
+                    <div className="progressFill" style={{ width: `${block.value}%` }} />
+                  </div>
                 </div>
-                <div className="progressTrack">
-                  <div className="progressFill" style={{ width: `${block.value}%` }} />
-                </div>
-                <p>{block.note}</p>
-              </div>
+              </article>
             ))}
           </div>
         </SectionCard>
 
-        <SectionCard title="Checklist visual" subtitle="Elementos que normalmente condicionan la experiencia de privacidad.">
+        <SectionCard
+          title="Checklist visual"
+          subtitle="Elementos que normalmente condicionan la experiencia de privacidad."
+          className="checklistVisualCard"
+          icon={<DetailIcon name="shield" />}
+        >
           <div className="checkGrid">
-            {item.checklist?.map((entry) => (
+            {item.checklist?.map((entry, index) => (
               <article key={entry.label} className={`checkItem ${getStatusTone(entry.status)}`}>
-                <div className="checkLabel">{entry.label}</div>
-                <p>{entry.note}</p>
+                <span className="checkItemIcon">
+                  <DetailIcon name={["list", "controls", "download", "userTrash"][index] || "shield"} />
+                </span>
+                <div>
+                  <div className="checkLabel">{entry.label}</div>
+                  <p>{entry.note}</p>
+                </div>
               </article>
             ))}
           </div>
