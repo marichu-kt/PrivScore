@@ -3,7 +3,15 @@ import { useLocation } from "react-router-dom";
 import ServiceDetailView from "../components/serviceDetailView";
 import { loadPersistedAnalysisReport, persistAnalysisReport, readReportFromSearch } from "../lib/analysisPayload";
 import { buildServiceFromReport, findCatalogMatch } from "../lib/reportToService";
-import { catalogServices } from "../data/catalogServices";
+import * as catalogServicesModule from "../data/catalogServices";
+
+function pickArrayExport(moduleObject, preferredName) {
+  if (Array.isArray(moduleObject?.[preferredName])) return moduleObject[preferredName];
+  if (Array.isArray(moduleObject?.default)) return moduleObject.default;
+  return Object.values(moduleObject || {}).find((value) => Array.isArray(value)) || [];
+}
+
+const catalogServices = pickArrayExport(catalogServicesModule, "catalogServices");
 
 export default function AnalysisDetailPage() {
   const location = useLocation();

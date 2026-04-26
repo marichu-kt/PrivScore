@@ -1,8 +1,14 @@
 import * as catalogServicesModule from "../data/catalogServices";
 import * as servicesMockModule from "../data/services.mock";
 
-const catalogServices = catalogServicesModule.catalogServices || catalogServicesModule.default || [];
-const servicesMock = servicesMockModule.servicesMock || servicesMockModule.default || [];
+function pickArrayExport(moduleObject, preferredName) {
+  if (Array.isArray(moduleObject?.[preferredName])) return moduleObject[preferredName];
+  if (Array.isArray(moduleObject?.default)) return moduleObject.default;
+  return Object.values(moduleObject || {}).find((value) => Array.isArray(value)) || [];
+}
+
+const catalogServices = pickArrayExport(catalogServicesModule, "catalogServices");
+const servicesMock = pickArrayExport(servicesMockModule, "servicesMock");
 
 const USE_BACKEND = false;
 

@@ -458,7 +458,7 @@ function buildService(config) {
   };
 }
 
-export const servicesMock = [
+const servicesMock = [
   buildService({
     _id: "signal",
     name: "Signal",
@@ -890,3 +890,6 @@ export const servicesMock = [
     policyLinks: { privacy: "https://policies.google.com/privacy", terms: "https://policies.google.com/terms", cookies: "https://policies.google.com/technologies/cookies" },
   }),
 ];
+
+export { servicesMock };
+export default servicesMock;
