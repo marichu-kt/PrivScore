@@ -18,6 +18,35 @@ function normalizeBaseUrl(input = DEFAULT_FRONTEND_BASE_URL) {
   return url;
 }
 
+function normalizeHostname(value = "") {
+  const raw = String(value || "").trim().toLowerCase();
+  if (!raw) return "";
+
+  try {
+    const withProtocol = /^https?:\/\//i.test(raw) ? raw : `https://${raw}`;
+    const parsed = new URL(withProtocol);
+    return parsed.hostname.replace(/^www\./, "");
+  } catch {
+    return raw
+      .replace(/^https?:\/\//i, "")
+      .split(/[/?#]/)[0]
+      .replace(/^www\./, "");
+  }
+}
+
+function getReportHostname(report = {}) {
+  const fromHost = normalizeHostname(report.host);
+  if (fromHost) return fromHost;
+
+  const fromUrl = normalizeHostname(report.url);
+  if (fromUrl) return fromUrl;
+
+  const fromPolicy = normalizeHostname(report.policyUrl);
+  if (fromPolicy) return fromPolicy;
+
+  return "";
+}
+
 export function buildFrontendPayload(report = {}) {
   const cookies = report.cookies || {};
   const page = report.page || {};
@@ -56,11 +85,22 @@ export function buildFrontendPayload(report = {}) {
   };
 }
 
-export function buildFrontendDetailUrl(baseUrl, report) {
+function buildAnalysisUrl(url, report) {
   const payload = buildFrontendPayload(report);
   const json = JSON.stringify(payload);
   const encoded = bytesToBase64Url(new TextEncoder().encode(json));
-  const url = normalizeBaseUrl(baseUrl);
   url.hash = `/analysis?report=${encoded}`;
   return url.toString();
+}
+
+export function buildFrontendDetailUrl(baseUrl, report) {
+  const url = normalizeBaseUrl(baseUrl);
+  const hostname = getReportHostname(report);
+
+  if (hostname) {
+    url.hash = `/services/${encodeURIComponent(hostname)}`;
+    return url.toString();
+  }
+
+  return buildAnalysisUrl(url, report);
 }

@@ -10,7 +10,7 @@ const DEFAULTS = {
   geminiApiKey: "",
   geminiModelId: "gemini-2.5-flash-lite",
   geminiTimeoutMs: 12000,
-  frontendBaseUrl: "http://localhost:5173/",
+  frontendBaseUrl: "https://marichu-kt.github.io/PrivScore/",
 };
 
 function setStatus(message) {
