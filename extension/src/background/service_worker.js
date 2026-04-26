@@ -4,6 +4,7 @@ import { fetchFirstWorkingPolicyText } from "./policy_fetcher.js";
 import { getCookiesSummaryFromUrl, cookiesSummaryToText } from "./cookies_summary.js";
 import { geminiExtractSignals } from "./gemini_client.js";
 import { buildFrontendDetailUrl, DEFAULT_FRONTEND_BASE_URL } from "../shared/frontend_link.js";
+import { applyCatalogScore } from "../shared/catalog_scores.js";
 
 const DEFAULTS = {
   useAI: false,
@@ -220,7 +221,8 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
       }
     }
 
-    const scored = computeScoreFromSignals(finalSignals);
+    const liveScored = computeScoreFromSignals(finalSignals);
+    const scored = applyCatalogScore(liveScored, { host, pageTitle, url, policyUrl });
 
     const report = {
       host,
@@ -232,6 +234,8 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
       score: scored.score,
       grade: scored.grade,
       colorHex: scored.colorHex,
+      scoreSource: scored.scoreSource,
+      catalogMatch: scored.catalogMatch,
       confidence: scored.confidence,
       estimated: scored.estimated,
       breakdown: scored.breakdown,
@@ -259,6 +263,8 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
       score: scored.score,
       grade: scored.grade,
       colorHex: scored.colorHex,
+      scoreSource: scored.scoreSource,
+      catalogMatch: scored.catalogMatch,
       confidence: scored.confidence,
       estimated: scored.estimated,
       breakdown: scored.breakdown,
