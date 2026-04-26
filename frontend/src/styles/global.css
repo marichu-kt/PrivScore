@@ -1254,6 +1254,115 @@ strong, h1, h2, h3, .title, .brandName, .nutriSegment { overflow-wrap: anywhere;
 .findingCard.warn, .checkItem.warn { background: rgba(241, 163, 43, 0.08); border-color: rgba(241, 163, 43, 0.18); }
 .findingCard.alert, .checkItem.alert { background: rgba(227, 74, 74, 0.07); border-color: rgba(227, 74, 74, 0.18); }
 .findingCard.neutral, .checkItem.neutral { background: rgba(100, 116, 139, 0.06); border-color: rgba(100, 116, 139, 0.14); }
+.findingsSectionCard {
+  padding: 42px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.97);
+  border-color: #dce4ef;
+  box-shadow: 0 18px 42px rgba(30, 47, 80, 0.1);
+}
+.findingsSectionCard .sectionCardHead {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+.findingsSectionCard .sectionCardHead h2 {
+  color: #0c1d39;
+  font-size: clamp(2.4rem, 4.2vw, 4.1rem);
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+}
+.findingsSectionCard .sectionCardHead p {
+  margin: 0;
+  color: #34425e;
+  font-size: clamp(1.08rem, 1.6vw, 1.45rem);
+  line-height: 1.35;
+}
+.findingsSectionCard .findingsGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+}
+.findingsSectionCard .findingCard {
+  --finding-accent: #22c55e;
+  --finding-soft: rgba(34, 197, 94, 0.07);
+  --finding-border: rgba(34, 197, 94, 0.2);
+  position: relative;
+  display: grid;
+  grid-template-columns: 86px minmax(0, 1fr);
+  align-items: start;
+  gap: 26px;
+  min-height: 218px;
+  padding: 38px 34px;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid var(--finding-border);
+  background: linear-gradient(135deg, #fff 0%, var(--finding-soft) 100%);
+  box-shadow: 0 16px 30px rgba(18, 33, 58, 0.08);
+}
+.findingsSectionCard .findingCard::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: var(--finding-accent);
+}
+.findingsSectionCard .findingCard:nth-child(2) {
+  --finding-accent: #10a3a3;
+  --finding-soft: rgba(16, 163, 163, 0.07);
+  --finding-border: rgba(16, 163, 163, 0.22);
+}
+.findingsSectionCard .findingCard:nth-child(3) {
+  --finding-accent: #7c5bd8;
+  --finding-soft: rgba(124, 91, 216, 0.07);
+  --finding-border: rgba(124, 91, 216, 0.22);
+}
+.findingsSectionCard .findingIcon {
+  display: grid;
+  place-items: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  color: var(--finding-accent);
+  background: var(--finding-soft);
+  border: 1px solid var(--finding-border);
+}
+.findingsSectionCard .findingIcon .detailIcon {
+  width: 48px;
+  height: 48px;
+}
+.findingsSectionCard .findingContent {
+  min-width: 0;
+}
+.findingsSectionCard .findingCard h3 {
+  margin: 8px 0 0;
+  color: #0c1d39;
+  font-size: clamp(1.3rem, 1.55vw, 1.7rem);
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+}
+.findingsSectionCard .findingAccent {
+  display: block;
+  width: 44px;
+  height: 4px;
+  margin: 18px 0 22px;
+  border-radius: 999px;
+  background: var(--finding-accent);
+}
+.findingsSectionCard .findingCard p {
+  color: #172642;
+  font-size: 1.04rem;
+  line-height: 1.55;
+  font-weight: 600;
+}
+@media (max-width: 720px) {
+  .findingsSectionCard .findingCard {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 26px;
+  }
+}
 .dataTable { margin-top: 8px; }
 .tableHead, .tableRow { align-items: center; gap: 16px; padding: 14px 0; }
 .tableHead { border-bottom: 1px solid var(--line-strong); font-weight: 800; }

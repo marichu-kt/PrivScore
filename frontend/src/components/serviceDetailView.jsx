@@ -42,6 +42,12 @@ function DetailIcon({ name }) {
         <path d="m8 12 2.5 2.5L16 9" />
       </>
     ),
+    clock: (
+      <>
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 7v5l4 2" />
+      </>
+    ),
     cookie: (
       <>
         <path d="M20 13.4A8 8 0 1 1 10.6 4a4 4 0 0 0 5.4 5.4 4 4 0 0 0 4 4Z" />
@@ -61,6 +67,14 @@ function DetailIcon({ name }) {
       <>
         <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z" />
         <circle cx="12" cy="12" r="3" />
+      </>
+    ),
+    fileCheck: (
+      <>
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
+        <path d="M14 2v6h6" />
+        <path d="m8 15 2 2 5-6" />
+        <path d="M8 11h3" />
       </>
     ),
     list: (
@@ -195,6 +209,7 @@ export default function ServiceDetailView({ item, backTo = "/", backLabel = "Vol
   const browserSignals = item.browserSignals || null;
   const catalogStatus = item.rank ? `Catálogo · top ${item.rank}` : item.reviewStatus;
   const highlights = item.privacyHighlights?.slice(0, 3) || [];
+  const findingIcons = ["fileCheck", "bar", "clock"];
 
   return (
     <div className="detailPage">
@@ -317,12 +332,22 @@ export default function ServiceDetailView({ item, backTo = "/", backLabel = "Vol
         </SectionCard>
       </div>
 
-      <SectionCard title="Hallazgos clave" subtitle="Aspectos que influyen en la exposición de datos del servicio.">
+      <SectionCard
+        title="Hallazgos clave"
+        subtitle="Aspectos e indicadores importantes de datos del servicio"
+        className="findingsSectionCard"
+      >
         <div className="findingsGrid">
-          {item.findings?.map((finding) => (
+          {item.findings?.map((finding, index) => (
             <article key={`${finding.title}-${finding.body}`} className={`findingCard ${finding.tone}`}>
-              <h3>{finding.title}</h3>
-              <p>{finding.body}</p>
+              <span className="findingIcon">
+                <DetailIcon name={findingIcons[index] || "shield"} />
+              </span>
+              <div className="findingContent">
+                <h3>{finding.title}</h3>
+                <span className="findingAccent" aria-hidden="true" />
+                <p>{finding.body}</p>
+              </div>
             </article>
           ))}
         </div>
