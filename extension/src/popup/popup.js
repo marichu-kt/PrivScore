@@ -12,7 +12,6 @@ const siteEl = document.getElementById("site");
 const scoreEl = document.getElementById("score");
 const bulletsEl = document.getElementById("bullets");
 const detailBtn = document.getElementById("detailBtn");
-const copyBtn = document.getElementById("copyBtn");
 
 let lastResult = null;
 
@@ -176,23 +175,6 @@ async function analyzeCurrentTab() {
 
 analyzeBtn.addEventListener("click", analyzeCurrentTab);
 detailBtn.addEventListener("click", openFrontendReport);
-copyBtn.addEventListener("click", async () => {
-  try {
-    const site = siteEl.textContent || "";
-    const score = scoreEl.textContent || "";
-    const lines = Array.from(bulletsEl.querySelectorAll(".txt")).map((node) => `- ${node.textContent}`);
-    const text = `PrivScore\n${site}\n${score}\n\n${lines.join("\n")}`.trim();
-
-    await navigator.clipboard.writeText(text);
-    copyBtn.textContent = "Copiado";
-    setTimeout(() => {
-      copyBtn.textContent = "Copiar";
-    }, 900);
-  } catch (error) {
-    console.error(error);
-    setStatus("No se pudo copiar.");
-  }
-});
 
 setStatus("");
 setTopCollapsed(false);

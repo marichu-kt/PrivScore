@@ -292,10 +292,11 @@ body{
 }
 .btnGhost{
   flex:1;
-  border:1px solid var(--border);
-  background:#fff;
+  border:1px solid rgb(34,197,94);
+  background:rgb(34,197,94);
   border-radius:14px;
   padding:10px 12px;
+  color:#111827;
   font-weight:800;
   cursor:pointer;
 }
