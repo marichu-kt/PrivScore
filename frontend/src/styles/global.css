@@ -2240,3 +2240,332 @@ strong, h1, h2, h3, .title, .brandName, .nutriSegment { overflow-wrap: anywhere;
     display: none;
   }
 }
+
+/* Enhanced data rights and retention sections */
+.dataRetentionGrid {
+  align-items: stretch;
+}
+
+.dataRetentionGrid > .sectionCard {
+  min-height: 100%;
+}
+
+.dataRightsSectionCard,
+.retentionTransfersSectionCard {
+  padding: clamp(24px, 3vw, 38px);
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.97);
+  border-color: #dce4ef;
+  box-shadow: 0 18px 42px rgba(30, 47, 80, 0.1);
+}
+
+.dataRightsSectionCard .sectionCardHead,
+.retentionTransfersSectionCard .sectionCardHead {
+  align-items: center;
+  gap: 22px;
+  margin-bottom: 30px;
+}
+
+.dataRightsSectionCard .sectionCardIcon,
+.retentionTransfersSectionCard .sectionCardIcon {
+  flex: 0 0 auto;
+  width: 76px;
+  height: 76px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, #f1f5ff, #eaf0fb);
+  color: #2474ef;
+  box-shadow: 0 14px 28px rgba(36, 116, 239, 0.1);
+}
+
+.dataRightsSectionCard .sectionCardIcon .detailIcon,
+.retentionTransfersSectionCard .sectionCardIcon .detailIcon {
+  width: 40px;
+  height: 40px;
+  stroke-width: 1.9;
+}
+
+.dataRightsSectionCard .sectionCardHead h2,
+.retentionTransfersSectionCard .sectionCardHead h2 {
+  color: #071a34;
+  font-size: clamp(1.8rem, 3.3vw, 2.55rem);
+  line-height: 1;
+  letter-spacing: -0.055em;
+}
+
+.dataRightsSectionCard .sectionCardHead p,
+.retentionTransfersSectionCard .sectionCardHead p {
+  margin-top: 12px;
+  color: #31415f;
+  font-size: clamp(1rem, 1.35vw, 1.18rem);
+  line-height: 1.45;
+  font-weight: 600;
+}
+
+.dataRightsPanels {
+  display: grid;
+  gap: 22px;
+}
+
+.dataRightsPanel {
+  --data-rights-accent: #4d4df0;
+  --data-rights-bg: #f3f1ff;
+  --data-rights-ink: #2528c9;
+  display: grid;
+  grid-template-columns: 80px minmax(0, 1fr);
+  gap: 22px;
+  padding: 22px;
+  border-radius: 22px;
+  background: #fff;
+  border: 1px solid #dce4ef;
+  box-shadow: 0 12px 28px rgba(18, 33, 58, 0.06);
+}
+
+.dataRightsPanel--rights {
+  --data-rights-accent: #119c86;
+  --data-rights-bg: #eafaf5;
+  --data-rights-ink: #087468;
+}
+
+.dataRightsPanelIcon {
+  display: grid;
+  place-items: center;
+  width: 70px;
+  height: 70px;
+  border-radius: 24px;
+  background: var(--data-rights-bg);
+  color: var(--data-rights-accent);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.dataRightsPanelIcon .detailIcon {
+  width: 38px;
+  height: 38px;
+  stroke-width: 1.9;
+}
+
+.dataRightsPanelBody {
+  min-width: 0;
+}
+
+.dataRightsPanelBody h3,
+.transferLocationCard h3 {
+  margin: 0 0 16px;
+  color: var(--data-rights-ink, #071a34);
+  font-size: clamp(1.14rem, 1.85vw, 1.45rem);
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+  font-weight: 900;
+}
+
+.dataRightsChipGrid,
+.transferChipGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.dataRightsChip,
+.transferChip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 18px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #f4f2ff, #efedff);
+  color: #2528c9;
+  border: 1px solid #e1e0ff;
+  font-weight: 850;
+  line-height: 1.2;
+  box-shadow: 0 8px 18px rgba(80, 98, 244, 0.05);
+}
+
+.dataRightsChip--rights {
+  background: linear-gradient(180deg, #eafaf5, #e5f6f1);
+  color: #087468;
+  border-color: #d7eee8;
+}
+
+.dataRightsChip .detailIcon,
+.transferChip .detailIcon {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  stroke-width: 2.2;
+}
+
+.retentionTransfersSectionCard {
+  display: flex;
+  flex-direction: column;
+}
+
+.retentionTimeline {
+  position: relative;
+  display: grid;
+  gap: 0;
+  margin: 4px 0 32px;
+  padding-left: 84px;
+}
+
+.retentionTimeline::before {
+  content: "";
+  position: absolute;
+  left: 40px;
+  top: 18px;
+  bottom: 18px;
+  width: 1px;
+  background: #dbe4f1;
+}
+
+.retentionTimelineItem {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 22px;
+  min-height: 72px;
+  padding: 2px 0 20px;
+  align-items: center;
+}
+
+.retentionTimelineItem:not(:last-child) .retentionTimelineText {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #dfe6f0;
+}
+
+.retentionTimelineIcon {
+  position: absolute;
+  left: -84px;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #f1f6ff, #eaf1fb);
+  color: #2474ef;
+  box-shadow: 0 10px 22px rgba(36, 116, 239, 0.08);
+  z-index: 1;
+}
+
+.retentionTimelineIcon .detailIcon {
+  width: 28px;
+  height: 28px;
+  stroke-width: 2;
+}
+
+.retentionTimelineText {
+  min-width: 0;
+  color: #263650;
+  font-size: clamp(1.02rem, 1.45vw, 1.2rem);
+  line-height: 1.45;
+}
+
+.retentionTimelineText strong {
+  color: #0c1d39;
+  font-weight: 900;
+}
+
+.retentionTimelineText span {
+  margin-left: 5px;
+  color: #2f3d56;
+  font-weight: 600;
+}
+
+.transferLocationCard {
+  margin-top: auto;
+  padding: 22px 24px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, #fbfdff, #f4f7fb);
+  border: 1px solid #dce4ef;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.82);
+}
+
+.transferLocationCard h3 {
+  --data-rights-ink: #071a34;
+}
+
+.transferChip {
+  background: linear-gradient(180deg, #eef2ff, #e8edff);
+  color: #2438cc;
+  border-color: #dfe5ff;
+}
+
+.transferChip:first-child {
+  min-width: 86px;
+}
+
+@media (max-width: 1100px) {
+  .dataRightsSectionCard .sectionCardHead,
+  .retentionTransfersSectionCard .sectionCardHead {
+    align-items: flex-start;
+  }
+
+  .dataRightsPanel {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .dataRightsSectionCard,
+  .retentionTransfersSectionCard {
+    padding: 22px;
+    border-radius: 24px;
+  }
+
+  .dataRightsSectionCard .sectionCardHead,
+  .retentionTransfersSectionCard .sectionCardHead {
+    display: grid;
+    grid-template-columns: 58px minmax(0, 1fr);
+    gap: 16px;
+    margin-bottom: 22px;
+  }
+
+  .dataRightsSectionCard .sectionCardIcon,
+  .retentionTransfersSectionCard .sectionCardIcon {
+    width: 58px;
+    height: 58px;
+    border-radius: 18px;
+  }
+
+  .dataRightsSectionCard .sectionCardIcon .detailIcon,
+  .retentionTransfersSectionCard .sectionCardIcon .detailIcon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .dataRightsSectionCard .sectionCardHead h2,
+  .retentionTransfersSectionCard .sectionCardHead h2 {
+    font-size: 1.85rem;
+  }
+
+  .dataRightsPanel {
+    padding: 18px;
+  }
+
+  .dataRightsChip,
+  .transferChip {
+    width: 100%;
+    justify-content: flex-start;
+    min-height: 44px;
+  }
+
+  .retentionTimeline {
+    padding-left: 66px;
+  }
+
+  .retentionTimeline::before {
+    left: 28px;
+  }
+
+  .retentionTimelineIcon {
+    left: -66px;
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+  }
+
+  .retentionTimelineText span {
+    display: block;
+    margin: 4px 0 0;
+  }
+}

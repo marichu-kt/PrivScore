@@ -56,6 +56,32 @@ function DetailIcon({ name }) {
         <path d="M8.5 17.5h.01" />
       </>
     ),
+    database: (
+      <>
+        <ellipse cx="12" cy="5" rx="7" ry="3" />
+        <path d="M5 5v6c0 1.7 3.1 3 7 3s7-1.3 7-3V5" />
+        <path d="M5 11v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6" />
+      </>
+    ),
+    globe: (
+      <>
+        <circle cx="12" cy="12" r="9" />
+        <path d="M3 12h18" />
+        <path d="M12 3a14 14 0 0 1 0 18" />
+        <path d="M12 3a14 14 0 0 0 0 18" />
+      </>
+    ),
+    phone: (
+      <>
+        <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6.4 6.4l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2Z" />
+      </>
+    ),
+    smartphone: (
+      <>
+        <rect x="7" y="2" width="10" height="20" rx="2" />
+        <path d="M11 18h2" />
+      </>
+    ),
     download: (
       <>
         <path d="M12 3v12" />
@@ -254,6 +280,9 @@ export default function ServiceDetailView({ item, backTo = "/", backLabel = "Vol
   const highlights = item.privacyHighlights?.slice(0, 3) || [];
   const findingIcons = ["fileCheck", "bar", "clock"];
   const termsIcons = ["shield", "userCheck", "muted"];
+  const collectedDataIcons = ["phone", "user", "smartphone", "database", "fileText", "list"];
+  const rightsControlIcons = ["lock", "userTrash", "userCheck", "info", "download", "controls"];
+  const retentionTimelineIcons = ["clock", "shield", "fileText", "database", "retention"];
   const legalLinks = [
     { label: "Política de privacidad", href: item.policyLinks?.privacy, icon: "lock" },
     { label: "Términos y condiciones", href: item.policyLinks?.terms, icon: "fileText" },
@@ -486,7 +515,7 @@ export default function ServiceDetailView({ item, backTo = "/", backLabel = "Vol
 
         <SectionCard
           title="Terceros y socios"
-          subtitle="Herramientas integradas y proveedores asociados."
+          subtitle="Herramientas integradas y proveedores asociados al tratamiento."
           className="partnersSectionCard"
         >
           <div className="partnersShowcase">
@@ -578,46 +607,89 @@ export default function ServiceDetailView({ item, backTo = "/", backLabel = "Vol
         </div>
       ) : null}
 
-      <div className="twoCols alignStart">
-        <SectionCard title="Datos y derechos" subtitle="Tipos de datos declarados y controles disponibles para el usuario.">
-          <div className="stackBlock">
-            <div>
-              <h3 className="subTitle">Datos que declara recopilar</h3>
-              <div className="chipCluster">
-                {item.collectedData?.map((entry) => (
-                  <span key={entry} className="softChip">{entry}</span>
-                ))}
-              </div>
-            </div>
+      <div className="twoCols alignStart dataRetentionGrid">
+        <SectionCard
+          title="Datos y derechos"
+          subtitle="Tipos de datos declarados y controles disponibles para el usuario."
+          className="dataRightsSectionCard"
+          icon={<DetailIcon name="fileCheck" />}
+        >
+          <div className="dataRightsPanels">
+            <article className="dataRightsPanel dataRightsPanel--data">
+              <span className="dataRightsPanelIcon">
+                <DetailIcon name="database" />
+              </span>
 
-            <div>
-              <h3 className="subTitle">Derechos y controles</h3>
-              <div className="chipCluster">
-                {item.rights?.map((entry) => (
-                  <span key={entry} className="softChip strong">{entry}</span>
-                ))}
+              <div className="dataRightsPanelBody">
+                <h3>Datos que declara recopilar</h3>
+                <div className="dataRightsChipGrid">
+                  {item.collectedData?.map((entry, index) => (
+                    <span key={entry} className="dataRightsChip">
+                      <DetailIcon name={collectedDataIcons[index % collectedDataIcons.length]} />
+                      {entry}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
+            </article>
+
+            <article className="dataRightsPanel dataRightsPanel--rights">
+              <span className="dataRightsPanelIcon">
+                <DetailIcon name="shield" />
+              </span>
+
+              <div className="dataRightsPanelBody">
+                <h3>Derechos y controles</h3>
+                <div className="dataRightsChipGrid">
+                  {item.rights?.map((entry, index) => (
+                    <span key={entry} className="dataRightsChip dataRightsChip--rights">
+                      <DetailIcon name={rightsControlIcons[index % rightsControlIcons.length]} />
+                      {entry}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </article>
           </div>
         </SectionCard>
 
-        <SectionCard title="Retención y transferencias" subtitle="Conservación declarada y ubicaciones mencionadas en la documentación.">
-          <div className="stackBlock">
-            <ul className="detailList">
-              {item.retentionDetails?.map((entry) => (
-                <li key={entry}>{entry}</li>
-              ))}
-            </ul>
+        <SectionCard
+          title="Retención y transferencias"
+          subtitle="Conservación declarada y ubicaciones mencionadas en la documentación."
+          className="retentionTransfersSectionCard"
+          icon={<DetailIcon name="globe" />}
+        >
+          <div className="retentionTimeline">
+            {item.retentionDetails?.map((entry, index) => {
+              const separatorIndex = entry.indexOf(":");
+              const label = separatorIndex >= 0 ? entry.slice(0, separatorIndex) : entry;
+              const description = separatorIndex >= 0 ? entry.slice(separatorIndex + 1).trim() : "";
 
-            <div>
-              <h3 className="subTitle">Transferencias o ubicaciones</h3>
-              <div className="chipCluster">
-                {item.transfers?.map((entry) => (
-                  <span key={entry} className="softChip">{entry}</span>
-                ))}
-              </div>
-            </div>
+              return (
+                <article key={entry} className="retentionTimelineItem">
+                  <span className="retentionTimelineIcon">
+                    <DetailIcon name={retentionTimelineIcons[index % retentionTimelineIcons.length]} />
+                  </span>
+                  <div className="retentionTimelineText">
+                    <strong>{label}{separatorIndex >= 0 ? ":" : ""}</strong>
+                    {description ? <span>{description}</span> : null}
+                  </div>
+                </article>
+              );
+            })}
           </div>
+
+          <article className="transferLocationCard">
+            <h3>Transferencias o ubicaciones</h3>
+            <div className="transferChipGrid">
+              {item.transfers?.map((entry, index) => (
+                <span key={entry} className="transferChip">
+                  {index === 0 ? <DetailIcon name="globe" /> : null}
+                  {entry}
+                </span>
+              ))}
+            </div>
+          </article>
         </SectionCard>
       </div>
 
