@@ -69,12 +69,17 @@ export default function CatalogPage() {
   const [rating, setRating] = useState("");
   const [category, setCategory] = useState("");
   const [sortBy, setSortBy] = useState("score-desc");
+  const [showAllServices, setShowAllServices] = useState(false);
 
   useEffect(() => {
     getServices()
       .then(setAllItems)
       .catch(console.error);
   }, []);
+
+  useEffect(() => {
+    setShowAllServices(false);
+  }, [q, rating, category, sortBy]);
 
   const categories = useMemo(
     () => Array.from(new Set(allItems.map((item) => item.category))).sort((a, b) => a.localeCompare(b)),
@@ -114,6 +119,9 @@ export default function CatalogPage() {
   const totalTrackers = visibleItems.reduce((acc, item) => acc + (item.trackerCount || 0), 0);
   const totalThirdParties = visibleItems.reduce((acc, item) => acc + (item.thirdPartyCount || 0), 0);
   const avgScore = averageScore(visibleItems);
+  const visibleServiceCards = showAllServices ? visibleItems : visibleItems.slice(0, 10);
+  const canShowAllServices = visibleItems.length > 10 && !showAllServices;
+  const canShowLessServices = visibleItems.length > 10 && showAllServices;
 
   return (
     <div className="catalogPage">
@@ -242,17 +250,52 @@ export default function CatalogPage() {
       </div>
 
       {visibleItems.length ? (
-        <div className="catalogGrid">
-          {visibleItems.map((service) => (
-            <ServiceCard key={service._id} service={service} />
-          ))}
-        </div>
+        <>
+          <div className="catalogGrid">
+            {visibleServiceCards.map((service) => (
+              <ServiceCard key={service._id} service={service} />
+            ))}
+          </div>
+          {canShowAllServices ? (
+            <div className="catalogActions">
+              <button className="loadMoreButton" type="button" onClick={() => setShowAllServices(true)}>
+                Ver todos
+              </button>
+            </div>
+          ) : null}
+          {canShowLessServices ? (
+            <div className="catalogActions">
+              <button className="loadMoreButton loadMoreButtonSecondary" type="button" onClick={() => setShowAllServices(false)}>
+                Ver menos
+              </button>
+            </div>
+          ) : null}
+        </>
       ) : (
         <div className="emptyState">
           <h3>No hay resultados con ese filtro</h3>
           <p>Prueba otra categoría, rating o una búsqueda más amplia.</p>
         </div>
       )}
+
+      <footer className="siteFooter">
+        <div className="footerBrand">
+          <img src={appLogo} alt="PrivScore" className="footerLogo" />
+          <div>
+            <strong>PrivScore</strong>
+            <span>Lectura clara de privacidad para servicios digitales.</span>
+          </div>
+        </div>
+
+        <div className="footerLinks" aria-label="Áreas de análisis">
+          <span>Cookies</span>
+          <span>Terceros</span>
+          <span>Retención</span>
+          <span>Derechos</span>
+        </div>
+
+        <div className="footerFine">© {new Date().getFullYear()} PrivScore. Evaluación visual de privacidad.</div>
+      </footer>
     </div>
   );
 }

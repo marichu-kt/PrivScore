@@ -378,6 +378,100 @@ strong, h1, h2, h3, .title, .brandName, .nutriSegment { overflow-wrap: anywhere;
 .statsGrid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .metricsGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .catalogGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.catalogActions {
+  display: flex;
+  justify-content: center;
+  margin: 4px 0 18px;
+}
+.loadMoreButton {
+  min-height: 54px;
+  min-width: 190px;
+  border: 0;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #4052ff, #2f43e6);
+  color: #fff;
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 16px 28px rgba(47, 67, 230, 0.24);
+}
+.loadMoreButton:hover {
+  filter: brightness(1.04);
+}
+.loadMoreButtonSecondary {
+  background: #fff;
+  color: #2f43e6;
+  border: 1px solid rgba(80, 98, 244, 0.24);
+  box-shadow: 0 12px 24px rgba(30, 47, 80, 0.1);
+}
+.loadMoreButton:focus-visible {
+  outline: 3px solid rgba(80, 98, 244, 0.28);
+  outline-offset: 3px;
+}
+.siteFooter {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) auto;
+  gap: 22px;
+  align-items: center;
+  padding: 26px;
+  border: 1px solid rgba(220, 227, 238, 0.95);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 16px 36px rgba(30, 47, 80, 0.1);
+}
+.footerBrand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+.footerLogo {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  border-radius: 18px;
+  background: #f1f4fc;
+  border: 1px solid #dfe6f5;
+  padding: 8px;
+}
+.footerBrand div {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+.footerBrand strong {
+  color: #0c1d39;
+  font-size: 1.18rem;
+  font-weight: 900;
+}
+.footerBrand span,
+.footerFine {
+  color: #66758f;
+  line-height: 1.5;
+}
+.footerLinks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.footerLinks span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: #eef3ff;
+  color: #2447c8;
+  font-weight: 750;
+  font-size: 0.9rem;
+}
+.footerFine {
+  grid-column: 1 / -1;
+  padding-top: 16px;
+  border-top: 1px solid #dfe6f0;
+  font-size: 0.92rem;
+}
 .findingsGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .checkGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .statCard, .metricCard { padding: 22px; }
@@ -1008,6 +1102,8 @@ strong, h1, h2, h3, .title, .brandName, .nutriSegment { overflow-wrap: anywhere;
   .serviceCard .highlightList { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .serviceCard .cardFooter { grid-template-columns: 1fr; }
   .serviceCard .primaryButton { width: 100%; min-width: 0; }
+  .siteFooter { grid-template-columns: 1fr; }
+  .footerLinks { justify-content: flex-start; }
   .partnerMeta { justify-items: start; text-align: left; }
   .tableHead { display: none; }
   .tableRow { padding: 16px; border: 1px solid var(--line); border-radius: 18px; margin-top: 10px; }
