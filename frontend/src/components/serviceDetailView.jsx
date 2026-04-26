@@ -3,6 +3,63 @@ import { formatDateTime, getRatingMeta, getStatusTone } from "../lib/serviceUtil
 import NutriScore from "./nutriScore";
 import LogoMark from "./logoMark";
 
+function DetailIcon({ name }) {
+  const icons = {
+    bar: (
+      <>
+        <path d="M6 18v-5" />
+        <path d="M12 18V7" />
+        <path d="M18 18v-9" />
+      </>
+    ),
+    check: (
+      <>
+        <circle cx="12" cy="12" r="10" />
+        <path d="m8 12 2.5 2.5L16 9" />
+      </>
+    ),
+    eye: (
+      <>
+        <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z" />
+        <circle cx="12" cy="12" r="3" />
+      </>
+    ),
+    shield: (
+      <>
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
+        <path d="m9 12 2 2 4-5" />
+      </>
+    ),
+    user: (
+      <>
+        <circle cx="12" cy="8" r="4" />
+        <path d="M5 21a7 7 0 0 1 14 0" />
+      </>
+    ),
+    users: (
+      <>
+        <path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2" />
+        <circle cx="9.5" cy="7" r="4" />
+        <path d="M22 21v-2a4 4 0 0 0-3-3.9" />
+        <path d="M16 3.2a4 4 0 0 1 0 7.6" />
+      </>
+    ),
+    warn: (
+      <>
+        <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z" />
+        <path d="M12 9v4" />
+        <path d="M12 17h.01" />
+      </>
+    ),
+  };
+
+  return (
+    <svg className={`detailIcon detailIcon--${name}`} viewBox="0 0 24 24" aria-hidden="true">
+      {icons[name]}
+    </svg>
+  );
+}
+
 function MetricCard({ label, value, helper }) {
   return (
     <div className="metricCard">
@@ -28,6 +85,8 @@ function SectionCard({ title, subtitle, children, className = "" }) {
 export default function ServiceDetailView({ item, backTo = "/", backLabel = "Volver al catálogo" }) {
   const ratingMeta = getRatingMeta(item.rating);
   const browserSignals = item.browserSignals || null;
+  const catalogStatus = item.rank ? `Catálogo · top ${item.rank}` : item.reviewStatus;
+  const highlights = item.privacyHighlights?.slice(0, 3) || [];
 
   return (
     <div className="detailPage">
@@ -41,11 +100,21 @@ export default function ServiceDetailView({ item, backTo = "/", backLabel = "Vol
 <LogoMark item={item} className="detailLogo" fallbackClassName="detailLogoFallback" />
             <div>
               <div className="eyebrowRow">
-                <span className="categoryChip">{item.category}</span>
-                <span className="microMeta">{item.reviewStatus}</span>
+                <span className="categoryChip">
+                  <DetailIcon name="users" />
+                  {item.category}
+                </span>
+                <span className="microMeta">
+                  <DetailIcon name="bar" />
+                  {catalogStatus}
+                </span>
               </div>
               <h1>{item.name}</h1>
-              <div className="meta">{item.domain} · {item.location}</div>
+              <div className="meta detailDomainMeta">
+                <span>{item.domain}</span>
+                <span>·</span>
+                <span>{item.location}</span>
+              </div>
             </div>
           </div>
 
@@ -53,8 +122,11 @@ export default function ServiceDetailView({ item, backTo = "/", backLabel = "Vol
           <p className="summary detailSummary">{item.summary}</p>
 
           <div className="heroChips">
-            {item.privacyHighlights?.map((itemText) => (
-              <span key={itemText} className="softChip">{itemText}</span>
+            {highlights.map((itemText, index) => (
+              <span key={itemText} className="softChip">
+                <DetailIcon name={["eye", "shield", "user"][index] || "shield"} />
+                {itemText}
+              </span>
             ))}
           </div>
         </div>
@@ -63,7 +135,7 @@ export default function ServiceDetailView({ item, backTo = "/", backLabel = "Vol
           <NutriScore rating={item.rating} size="large" score={item.score} />
           <div className="scoreMeta">
             <span className={`toneChip ${ratingMeta.tone}`}>{ratingMeta.label}</span>
-            <span className="softChip strong">{item.reviewStatus}</span>
+            <span className="softChip strong">{catalogStatus}</span>
           </div>
           <div className="scorePanelText">
             <strong>A favor:</strong> {item.strength}
