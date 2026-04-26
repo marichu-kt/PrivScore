@@ -12,10 +12,32 @@ function DetailIcon({ name }) {
         <path d="M18 18v-9" />
       </>
     ),
+    calendar: (
+      <>
+        <path d="M8 4v4" />
+        <path d="M16 4v4" />
+        <path d="M4 9h16" />
+        <rect x="4" y="5" width="16" height="16" rx="3" />
+        <path d="M8 13h.01" />
+        <path d="M12 13h.01" />
+        <path d="M16 13h.01" />
+        <path d="M8 17h.01" />
+        <path d="M12 17h.01" />
+        <path d="M16 17h.01" />
+      </>
+    ),
     check: (
       <>
         <circle cx="12" cy="12" r="10" />
         <path d="m8 12 2.5 2.5L16 9" />
+      </>
+    ),
+    cookie: (
+      <>
+        <path d="M20 13.4A8 8 0 1 1 10.6 4a4 4 0 0 0 5.4 5.4 4 4 0 0 0 4 4Z" />
+        <path d="M8 10h.01" />
+        <path d="M12 15h.01" />
+        <path d="M8.5 17.5h.01" />
       </>
     ),
     eye: (
@@ -28,6 +50,34 @@ function DetailIcon({ name }) {
       <>
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
         <path d="m9 12 2 2 4-5" />
+      </>
+    ),
+    retention: (
+      <>
+        <path d="M3 12a9 9 0 1 0 3-6.7" />
+        <path d="M3 4v6h6" />
+        <path d="M12 7v5l3 2" />
+        <rect x="14" y="14" width="7" height="6" rx="1.5" />
+        <path d="M16 14v-1a2 2 0 0 1 4 0v1" />
+      </>
+    ),
+    target: (
+      <>
+        <circle cx="12" cy="12" r="8" />
+        <circle cx="12" cy="12" r="3" />
+        <path d="M12 2v4" />
+        <path d="M12 18v4" />
+        <path d="M2 12h4" />
+        <path d="M18 12h4" />
+      </>
+    ),
+    trash: (
+      <>
+        <path d="M3 6h18" />
+        <path d="M8 6V4h8v2" />
+        <path d="M19 6l-1 15H6L5 6" />
+        <path d="M10 11v6" />
+        <path d="M14 11v6" />
       </>
     ),
     user: (
@@ -61,10 +111,24 @@ function DetailIcon({ name }) {
 }
 
 function MetricCard({ label, value, helper }) {
+  const iconByLabel = {
+    Borrado: "trash",
+    Cookies: "cookie",
+    Retención: "retention",
+    Terceros: "users",
+    Trackers: "target",
+    "Última revisión": "calendar",
+  };
+  const icon = iconByLabel[label] || "bar";
+
   return (
-    <div className="metricCard">
+    <div className="metricCard" data-metric={icon}>
+      <div className="metricIcon">
+        <DetailIcon name={icon} />
+      </div>
       <div className="metricLabel">{label}</div>
       <div className="metricValue">{value}</div>
+      <div className="metricDivider" aria-hidden="true" />
       <div className="metricHelper">{helper}</div>
     </div>
   );
