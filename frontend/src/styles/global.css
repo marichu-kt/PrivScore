@@ -85,28 +85,294 @@ strong, h1, h2, h3, .title, .brandName, .nutriSegment { overflow-wrap: anywhere;
   overflow: hidden;
 }
 
-.heroPanel { padding: 28px; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(320px, 0.8fr); gap: 22px; }
-.heroBadge {
-  display: inline-flex; align-items: center; gap: 16px; padding: 16px 22px; border-radius: 30px;
-  background: rgba(80, 98, 244, 0.08); color: #2d3cae; font-weight: 800; width: fit-content;
-  box-shadow: inset 0 0 0 1px rgba(80, 98, 244, 0.08);
+.heroPanel {
+  padding: 40px 38px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 432px;
+  align-items: stretch;
+  gap: 56px;
+  background: #fff;
+  border-color: rgba(214, 223, 238, 0.95);
+  box-shadow: 0 18px 46px rgba(30, 47, 80, 0.12);
 }
-.heroBadge span { font-size: 1.22rem; letter-spacing: -0.03em; }
-.heroIcon { width: 74px; height: 74px; border-radius: 18px; }
+.heroBadge {
+  display: inline-flex; align-items: center; gap: 18px; padding: 16px 28px; border-radius: 30px;
+  background: #eef2ff; color: #1e40af; font-weight: 900; width: fit-content;
+  border: 1px solid #d9e1ff;
+}
+.heroBadge span { font-size: 1.22rem; letter-spacing: -0.04em; }
+.heroIcon { width: 78px; height: 78px; border-radius: 18px; }
 .heroPanel h1, .detailHero h1 {
   margin: 14px 0 10px; font-size: clamp(2.1rem, 3.6vw, 3.4rem); line-height: 1;
   letter-spacing: -0.06em;
 }
+.heroPanel h1 {
+  max-width: 780px;
+  margin: 34px 0 18px;
+  color: #0f1f3a;
+  font-size: clamp(3rem, 5.2vw, 4.55rem);
+  line-height: 1.04;
+}
 .heroPanel p, .sectionCardHead p, .statHelper, .metricHelper, .emptyState p, .lead, .summary, .detailList, .noteBox {
   color: var(--muted); line-height: 1.6;
 }
+.heroPanel p { max-width: 78ch; font-size: 1.08rem; }
 .heroAside {
-  background: linear-gradient(180deg, rgba(80, 98, 244, 0.08), rgba(80, 98, 244, 0.02));
-  border: 1px solid rgba(80, 98, 244, 0.12); border-radius: 22px; padding: 22px;
+  background: #f0f4ff;
+  border: 1px solid #d9e1ff; border-radius: 28px; padding: 28px 30px;
 }
 .heroAsideScale { display: grid; gap: 18px; align-content: start; }
-.asideTitle { font-weight: 800; font-size: 1.05rem; margin-bottom: 8px; }
-.heroLegend { display: grid; gap: 8px; color: var(--muted); font-size: 0.96rem; }
+.asideTitle { font-weight: 900; font-size: 1.1rem; margin-bottom: 16px; color: #06172f; }
+.heroAside p { margin: 0; max-width: 40ch; font-size: 1rem; line-height: 1.55; }
+.heroAside .nutriScore--hero { margin: 18px 0 8px; }
+.heroAside .nutriScore--hero .nutriScorePlate {
+  padding: 22px 26px;
+  border: 2px solid #b8c0cc;
+  border-radius: 30px;
+  box-shadow: none;
+}
+.heroAside .nutriScore--hero .nutriScoreTrack {
+  padding: 0;
+  overflow: hidden;
+}
+.heroAside .nutriScore--hero .nutriSegment {
+  min-height: 80px;
+  font-size: clamp(2.2rem, 4vw, 3.1rem);
+}
+.heroLegend { display: grid; gap: 10px; color: #53637e; font-size: 1rem; }
+.heroIconSvg {
+  width: 1.1em;
+  height: 1.1em;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.heroPanel {
+  padding: 34px 42px;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.48fr);
+  gap: 48px;
+  align-items: stretch;
+  background: rgba(255, 255, 255, 0.96);
+  border-color: rgba(224, 231, 242, 0.95);
+  border-radius: 30px;
+  box-shadow: 0 26px 58px rgba(30, 47, 80, 0.14);
+}
+
+.heroContent {
+  align-content: start;
+}
+
+.heroBadge {
+  min-width: 340px;
+  min-height: 132px;
+  gap: 22px;
+  padding: 22px 34px;
+  border-radius: 30px;
+  background: #f1f4fc;
+  border: 1px solid #dfe6f5;
+  box-shadow: 0 18px 34px rgba(18, 33, 58, 0.08);
+}
+
+.heroBadge span {
+  color: #0f2da8;
+  font-size: 1.6rem;
+  font-weight: 900;
+}
+
+.heroIcon {
+  width: 96px;
+  height: 96px;
+}
+
+.heroHeadlineRow {
+  display: grid;
+  grid-template-columns: 74px minmax(0, 1fr);
+  align-items: start;
+  gap: 30px;
+  margin-top: 38px;
+}
+
+.heroShieldBadge {
+  display: grid;
+  place-items: center;
+  width: 74px;
+  height: 74px;
+  border-radius: 22px;
+  background: #eaf4ff;
+  color: #2872c8;
+}
+
+.heroShieldBadge .heroIconSvg {
+  width: 38px;
+  height: 38px;
+}
+
+.heroPanel h1 {
+  max-width: 760px;
+  margin: 0;
+  color: #0c1d39;
+  font-size: clamp(2.45rem, 3.8vw, 3.75rem);
+  line-height: 1.08;
+  letter-spacing: -0.06em;
+}
+
+.heroPanel p {
+  max-width: 760px;
+  margin: 24px 0 0 104px;
+  color: #53637e;
+  font-size: 1.28rem;
+  line-height: 1.55;
+}
+
+.heroChips {
+  gap: 20px;
+  margin-top: 34px;
+}
+
+.heroChip {
+  min-height: 70px;
+  gap: 16px;
+  padding: 0 26px 0 18px;
+  border: 1px solid #dfe6f0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.84);
+  color: #0c1d39;
+  font-size: 1.05rem;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(18, 33, 58, 0.04);
+}
+
+.heroChipIcon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #e7f3ff;
+  color: #1e71c8;
+}
+
+.heroChipIcon--purple {
+  background: #efe9ff;
+  color: #6d48d5;
+}
+
+.heroChipIcon .heroIconSvg {
+  width: 21px;
+  height: 21px;
+}
+
+.heroAside {
+  padding: 28px 30px;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid #e1e7f0;
+  border-radius: 28px;
+  box-shadow: 0 22px 48px rgba(30, 47, 80, 0.12);
+}
+
+.heroAsideScale {
+  gap: 20px;
+  justify-items: stretch;
+}
+
+.heroAsideHead {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  text-align: center;
+}
+
+.heroAsideIcon {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: #e8f3ff;
+  color: #2d7bd1;
+}
+
+.heroAsideIcon .heroIconSvg {
+  width: 34px;
+  height: 34px;
+}
+
+.asideTitle {
+  margin: 0;
+  color: #0c1d39;
+  font-size: 1.55rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+
+.heroAside p {
+  max-width: 46ch;
+  margin-inline: auto;
+  color: #53637e;
+  font-size: 1.22rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.heroAside .nutriScore--hero {
+  margin: 16px 0 10px;
+}
+
+.heroAside .nutriScore--hero .nutriScorePlate {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.heroAside .nutriScore--hero .nutriScoreTrack {
+  padding: 0;
+  overflow: hidden;
+  border-radius: 18px;
+  box-shadow: 0 10px 22px rgba(18, 33, 58, 0.12);
+}
+
+.heroAside .nutriScore--hero .nutriSegment {
+  min-height: 92px;
+  font-size: clamp(2.2rem, 4vw, 3.15rem);
+}
+
+.heroLegend {
+  gap: 0;
+  color: #53637e;
+  font-size: 1.18rem;
+}
+
+.heroLegendItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 58px;
+  padding-left: 38px;
+  border-bottom: 1px solid #e0e6ef;
+}
+
+.heroLegendItem:last-child {
+  border-bottom: 0;
+}
+
+.heroLegendItem::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.heroLegendItem.good::before { background: #18a85b; }
+.heroLegendItem.mid::before { background: #f6c21a; }
+.heroLegendItem.high::before { background: #ff6b00; }
 .bulletColumn, .detailList { margin: 0; padding-left: 18px; display: grid; gap: 10px; }
 .statsGrid, .metricsGrid, .catalogGrid, .findingsGrid, .checkGrid { display: grid; gap: 18px; }
 .statsGrid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -253,6 +519,38 @@ strong, h1, h2, h3, .title, .brandName, .nutriSegment { overflow-wrap: anywhere;
 .toneChip.warn { color: #895000; background: rgba(241, 163, 43, 0.2); }
 .toneChip.alert { color: #a52e2e; background: rgba(227, 74, 74, 0.16); }
 .metricPills, .heroChips, .highlightList, .chipCluster { display: flex; gap: 10px; flex-wrap: wrap; }
+.heroChips { gap: 10px; margin-top: 34px; }
+.heroChip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 16px;
+  border-radius: 14px;
+  background: #e9edf2;
+  color: #06172f;
+  font-size: 0.98rem;
+  font-weight: 500;
+}
+.heroPanel .heroChips {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 34px;
+}
+.heroPanel .heroChip {
+  min-width: 0;
+  min-height: 58px;
+  gap: 10px;
+  padding: 0 14px 0 12px;
+  border: 1px solid #dfe6f0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.84);
+  color: #0c1d39;
+  font-size: 0.9rem;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(18, 33, 58, 0.04);
+}
 .metricPill, .softChip { min-height: 38px; border-radius: 14px; padding: 0 12px; }
 .metricPill {
   align-items: center; justify-content: space-between; min-width: 122px; background: var(--bg-soft);

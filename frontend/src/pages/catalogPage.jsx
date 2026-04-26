@@ -1,10 +1,57 @@
-
 import { useEffect, useMemo, useState } from "react";
 import { getServices } from "../api/servicesApi";
 import ServiceCard from "../components/serviceCard";
 import appLogo from "../assets/logo_PrivSocre.png";
 import { averageScore } from "../lib/serviceUtils";
 import NutriScore from "../components/nutriScore";
+
+function HeroIcon({ name }) {
+  const icons = {
+    bars: (
+      <>
+        <path d="M6 16v-3" />
+        <path d="M11 16V8" />
+        <path d="M16 16V5" />
+        <path d="M4 20h16" />
+      </>
+    ),
+    cookie: (
+      <>
+        <path d="M20 13.4A8 8 0 1 1 10.6 4a4 4 0 0 0 5.4 5.4 4 4 0 0 0 4 4Z" />
+        <path d="M8 10h.01" />
+        <path d="M12 15h.01" />
+        <path d="M8.5 17.5h.01" />
+      </>
+    ),
+    document: (
+      <>
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
+        <path d="M14 2v6h6" />
+        <path d="M8 13h8" />
+        <path d="M8 17h6" />
+      </>
+    ),
+    rights: (
+      <>
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
+        <path d="M12 8v5" />
+        <path d="M12 16h.01" />
+      </>
+    ),
+    shield: (
+      <>
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
+        <path d="m9 12 2 2 4-5" />
+      </>
+    ),
+  };
+
+  return (
+    <svg className={`heroIconSvg heroIconSvg--${name}`} viewBox="0 0 24 24" aria-hidden="true">
+      {icons[name]}
+    </svg>
+  );
+}
 
 function StatCard({ label, value, helper }) {
   return (
@@ -76,30 +123,57 @@ export default function CatalogPage() {
             <img src={appLogo} alt="PrivScore" className="heroIcon" />
             <span>PrivScore</span>
           </div>
-          <h1>Consulta la privacidad de cada servicio de un vistazo</h1>
+
+          <div className="heroHeadlineRow">
+            <span className="heroShieldBadge">
+              <HeroIcon name="shield" />
+            </span>
+            <h1>Consulta la privacidad de cada servicio de un vistazo</h1>
+          </div>
+
           <p>
             Cada ficha reúne score, cookies, terceros, conservación de datos, derechos y enlaces legales
             en una lectura clara y ordenada.
           </p>
+
           <div className="heroChips">
-            <span className="softChip strong">Cookies y tecnologías similares</span>
-            <span className="softChip strong">Términos y condiciones</span>
-            <span className="softChip strong">Derechos y conservación</span>
+            <span className="heroChip">
+              <span className="heroChipIcon heroChipIcon--blue">
+                <HeroIcon name="cookie" />
+              </span>
+              Cookies y tecnologías similares
+            </span>
+            <span className="heroChip">
+              <span className="heroChipIcon heroChipIcon--blue">
+                <HeroIcon name="document" />
+              </span>
+              Términos y condiciones
+            </span>
+            <span className="heroChip">
+              <span className="heroChipIcon heroChipIcon--purple">
+                <HeroIcon name="rights" />
+              </span>
+              Derechos y conservación
+            </span>
           </div>
         </div>
 
         <div className="heroAside heroAsideScale">
-          <div>
+          <div className="heroAsideHead">
+            <span className="heroAsideIcon">
+              <HeroIcon name="bars" />
+            </span>
             <div className="asideTitle">Escala de lectura</div>
-            <p>
-              De A a E, donde A indica menor exposición de datos y mejores controles visibles.
-            </p>
           </div>
+
+          <p>De A a E, donde A indica menor exposición de datos y mejores controles visibles.</p>
+
           <NutriScore size="hero" />
+
           <div className="heroLegend">
-            <span>A–B más contenida</span>
-            <span>C equilibrio medio</span>
-            <span>D–E exposición alta</span>
+            <span className="heroLegendItem good">A-B más contenida</span>
+            <span className="heroLegendItem mid">C equilibrio medio</span>
+            <span className="heroLegendItem high">D-E exposición alta</span>
           </div>
         </div>
       </section>
